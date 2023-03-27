@@ -19,7 +19,6 @@ main.js
 /src
 /public
 /node_modules
-index.html
 dist-ssr
 coverage
 *.local
