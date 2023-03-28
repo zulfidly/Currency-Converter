@@ -121,7 +121,8 @@
       x = x.toLowerCase()
       if(noflag.includes(x)) {
         //   return "https://icons.iconarchive.com/icons/iconsmind/outline/48/Dollar-Sign-icon.png"
-          return "src/components/icons/IconDollar.svg"
+          return "/IconDollar.svg"
+        //   return "src/components/icons/IconDollar.svg"
       } else {
           return `https://wise.com/public-resources/assets/flags/rectangle/${x}.png`
       }
