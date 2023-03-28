@@ -1,4 +1,5 @@
 # currex
+[![Netlify Status](https://api.netlify.com/api/v1/badges/de4f0402-6307-498c-8c38-af31e3f0fea5/deploy-status)](https://app.netlify.com/sites/fidly-currex/deploys)
 
 This template should help get you started developing with Vue 3 in Vite.
 
