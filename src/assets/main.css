@@ -1,0 +1,39 @@
+@import './base.css';
+
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}
+
+
+
+
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    /* place-items: center; */
+    justify-items: center;
+    align-items: flex-start;
+    margin-top: 50px;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 400px 400px;
+    padding: 0 0rem;
+  }
+}

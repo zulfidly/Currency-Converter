@@ -16,7 +16,7 @@ postcss.config.js
 tailwind.config.js
 vite.config.js
 main.js
-/src
+
 /public
 /node_modules
 dist-ssr
