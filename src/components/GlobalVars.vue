@@ -101,6 +101,13 @@
         inner2: ["h-auto w-full flex justify-center items-center"],
     }
 
+//////// amount input field styling
+    export const inputStyle = {
+        ctnr: [""]
+    }
+
+
+
 //////// mapping "https://api.exchangerate.host/symbols/"
     export const dashboardStyle = {
         outest: ["lg:col-span-2"],

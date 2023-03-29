@@ -13,7 +13,7 @@
         let id = e.target.parentElement.id;
         mainObj.userSettings.convertTo = id
         document.getElementById("duplicateConvertTo").innerHTML = `<div class="w-full h-14 px-2 flex justify-center items-center gap-x-3">${x.innerHTML}</div>`
-        console.log(x.outerHTML);
+        // console.log(x.outerHTML);
         userInputConTo.value = ""
     }
     watch (
@@ -27,7 +27,7 @@
             let offset = 0
             mainObj.allSymbols.forEach((x, ind) => {
                 if(symF == x.symbol || symT == x.symbol) {
-                    console.log('found', x.symbol, 'at ', ind);
+                    // console.log('found', x.symbol, 'at ', ind);
                     list.splice(ind-offset, 1)
                     offset++
                     mainObj.dynList = list

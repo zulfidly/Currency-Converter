@@ -6,16 +6,15 @@
     import ResultDashboard from './ResultDashboard.vue';
 
     const amtInput = ref("")
-
+    watch(amtInput, ()=> mainObj.fetched.result = "")
     const getConversion = () => {
         console.log(mainObj);
-        // amtInput.value = ""
         let base = mainObj.userSettings.convertFrom.toLowerCase()
         let res = mainObj.userSettings.convertTo.toLowerCase()
         let amt = mainObj.userSettings.amount
         let str = "https://api.exchangerate.host/convert/?" + `from=${base}` + `&to=${res}` + `&amount=${amt}`
         fetchAPI(`convertEndpoint`, str)
-        console.log(mainObj.userSettings);
+        // console.log(mainObj.userSettings);
     }
     function userInputChecker(e) {
         let regex = new RegExp("[0-9]", 'g')
@@ -28,7 +27,7 @@
             mainObj.userSettings.amount = str.toString()
             mainObj.userSettings.cFromFormattedForDisplay = formatter.format(amtInput.value)
         } else {
-            mainObj.userSettings.cFromFormattedForDisplay = "Unrecognisable format"
+            mainObj.userSettings.cFromFormattedForDisplay = "-unknown input-"
             mainObj.userSettings.amount = 0
         }
         console.log(mainObj.userSettings);
@@ -36,6 +35,7 @@
     watch(
         () => mainObj.userSettings.convertFrom,
         () => {
+            mainObj.fetched.result = undefined
             if(mainObj.userSettings.convertFrom && mainObj.userSettings.amount) {
                 const formatter = new Intl.NumberFormat(undefined, {currency: `${mainObj.userSettings.convertFrom}`, style:"currency"})
                 mainObj.userSettings.cFromFormattedForDisplay = formatter.format(amtInput.value)
@@ -67,11 +67,11 @@
             <template #convertBtn>
                 <button @click="getConversion" :class="[buttonStyleIs.convertBtn, isConvertible?buttonStyleIs.convertBtnActive:buttonStyleIs.convertBtnNotActive]">Convert</button>
             </template>
-                <!-- <template #baseCurrency>{{ inputFormattedForDisplay }} </template> -->
                 <template #baseCurrency>{{ mainObj.userSettings.cFromFormattedForDisplay }} </template>
                 <template #baseCountry> {{ mainObj.userSettings.countryFrom }}</template>
                 <template #outputCurrency> {{ mainObj.fetched.result }}</template>
                 <template #outputCountry> {{ mainObj.userSettings.countryTo }}</template>
+
                 <template #rate>{{ mainObj.fetched.rate }}</template>
                 <template #lastupdate> {{ mainObj.fetched.lastUpdated }}</template>
 
