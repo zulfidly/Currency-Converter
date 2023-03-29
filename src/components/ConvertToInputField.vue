@@ -1,7 +1,7 @@
 <script setup>
     import { watch, ref } from "vue";
     import { mainObj } from "./GlobalVars.vue"
-    import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, convFromCtnr, tide } from "./GlobalVars.vue"
+    import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "./GlobalVars.vue"
     import Btn from "./Button.vue"
     import SearchIcon from "./icons/SearchIcon.vue"
 
@@ -74,7 +74,7 @@
         <div :class="[convFromCtnr.inner1]">
             <div :class="[convFromCtnr.inner2]">
                 <SearchIcon/>
-                <input @focus="onFocusInput" v-on:blur="onFocusInput" v-model="userInputConTo" :class="[buttonStyleIs.symbolSearchInput]" placeholder="Convert to" type="text"/>
+                <input @focus="onFocusInput" v-on:blur="onFocusInput" v-model="userInputConTo" :class="[inputStyle.symbolSearchInput]" placeholder="Convert to" type="text"/>
                 <Btn @mousedown="clearInput" :class="[buttonStyleIs.clear]">
                     <template #btn>Reset</template>
                 </Btn>

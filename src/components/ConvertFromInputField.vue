@@ -1,7 +1,7 @@
 <script setup>
     import { watch, ref, computed } from "vue";
     import { mainObj } from "./GlobalVars.vue"
-    import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, convFromCtnr, tide } from "./GlobalVars.vue"
+    import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "./GlobalVars.vue"
     import Btn from "./Button.vue"
     import SearchIcon from "./icons/SearchIcon.vue"
 
@@ -14,6 +14,7 @@
         mainObj.userSettings.convertFrom = id
         document.getElementById("duplicateConvertFrom").innerHTML = `<div class="w-full h-14 px-2 flex justify-center items-center gap-x-3">${x.innerHTML}</div>`
         userInputConFrom.value = ""
+
     }
     watch (
         () => mainObj.userSettings.convertFrom,
@@ -72,7 +73,7 @@
         <div :class="[convFromCtnr.inner1]">
             <div :class="[convFromCtnr.inner2]">
                 <SearchIcon/>
-                <input @focus="onFocusInput" v-on:blur="onFocusInput" v-model="userInputConFrom" :class="[buttonStyleIs.symbolSearchInput]" placeholder="Convert from" type="text"/>
+                <input @focus="onFocusInput" v-on:blur="onFocusInput" v-model="userInputConFrom" :class="[inputStyle.symbolSearchInput]" placeholder="Convert from" type="text"/>
                 <Btn @mousedown="clearInput" :class="[buttonStyleIs.clear]">
                     <template #btn>Reset</template>
                 </Btn>
@@ -92,7 +93,7 @@
             </ul>
         </div>
         <div id="duplicateConvertFrom" v-show="!isListConFromDisplay" class="h-16">
-            <div id="MYR" class="w-full h-14 px-2 flex items-center gap-x-3 justify-center"><img class="border border-gray-900" src="https://wise.com/public-resources/assets/flags/rectangle/myr.png"><span class="text-lg font-semibold">MYR</span><span class="text-sm break-normal"> [Malaysian Ringgit] </span><span class="absolute top-0 left-0 w-full h-full"></span></div>        
+            <div class="w-full h-14 px-2 flex items-center gap-x-3 justify-center"><img class="border border-gray-900" src="https://wise.com/public-resources/assets/flags/rectangle/myr.png"><span class="text-lg font-semibold">MYR</span><span class="text-sm break-normal"> [Malaysian Ringgit] </span><span class="absolute top-0 left-0 w-full h-full"></span></div>        
         </div>
     </div>
 

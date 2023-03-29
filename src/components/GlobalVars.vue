@@ -17,14 +17,23 @@
             lastUpdated: "",
             rate: "",
             result: "",
+        },
+        isFetching: false,
+        swapCurr: {
+            from: { top: "", left:"" },
+            to: { top: "", left:"" },
         }
     })
 
 //////// functions responding to fetchAPI()
     export function fetchAPI(fu, endpoint) {
+        mainObj.isFetching = true
         axios
             .get(endpoint)
-            .then((response) => funcLib[fu](response.data) ) 
+            .then((response) => {
+                funcLib[fu](response.data)
+                mainObj.isFetching = false
+             }) 
             // .then((response) =>  eval(`${fu}(response.data)`) )
             .catch((error) => console.log(error) )
     }
@@ -49,7 +58,6 @@
         },
     }
 
-
 ////////header stylings
     export const headerStyleIs = {
         header: ["w-full h-auto bg-[var(--color-background-soft)] flex justify-evenly lg:justify-between items-center rounded-md lg:col-span-2"],
@@ -61,10 +69,10 @@
 
 ////////button stylings
     export const buttonStyleIs = {
-        symbolSearchInput: ["bg-[var(--color-background-mute)] text-lg w-full h-[50px] pl-14 rounded-md tracking-wider"],
+        // symbolSearchInput: ["bg-[var(--color-background-mute)] text-lg w-full h-[50px] pl-14 rounded-md tracking-wider"],
         dynDropList: ["w-full h-14 px-2 flex justify-start items-center gap-x-3 rounded-lg lg:hover:bg-[var(--color-background-soft)] lg:hover:scale-[0.99] ease-out duration-200"],
         clear: ["absolute right-[10px] py-1 px-4 border border-2 border-[var(--color-border)] rounded-lg active:scale-90 ease-out duration-150"],
-        convertBtn: ["px-6 py-2 w-auto h-auto rounded-lg text-2xl tracking-widest transition-all ease-out duration-700 bg-[var(--color-background-mute)]"],
+        convertBtn: [`px-6 py-2 w-auto h-auto rounded-full text-2xl flex items-center tracking-widest transition-all ease-out duration-700 bg-[var(--color-background-mute)]`],
         convertBtnActive:    [" z-0 bg-[var(--color-bg-convert-btn)]"],
         convertBtnNotActive: ["-z-10"],
     }
@@ -103,17 +111,19 @@
 
 //////// amount input field styling
     export const inputStyle = {
-        ctnr: [""]
+        symbolSearchInput: ["bg-[var(--color-background-mute)] text-lg w-full h-[50px] pl-14 rounded-md tracking-wider placeholder:italic text-sm"],
+        amtinput: ["bg-[var(--color-background-mute)] text-center text-xl w-full h-[50px] rounded-r-md tracking-widest flex items-center placeholder:text-center placeholder:text-sm italic"],
     }
 
 
 
 //////// mapping "https://api.exchangerate.host/symbols/"
     export const dashboardStyle = {
-        outest: ["lg:col-span-2"],
-        outestHide: ["opacity-0"],
+        // outest: ["lg:col-span-2"],
+        // outestHide: ["opacity-0"],
         ctnr: ["grid lg:block grid-cols-1 gap-y-4 mt-5 lg:col-span-2"],
         convertBtnDiv: ["flex justify-center"],
+        baseNameTag: ["bg-[var(--color-background-mute)] rounded-l-md text-xl h-[50px] px-3 flex items-center border-dotted border-r-[0.5px] border-[var(--color-text)]"],
         basecurr: ["text-xl text-center tracking-wider"],
         baseCountry: ["text-md text-center tracking-wider"],
         outcurr: ["text-xl text-center tracking-wider"],
