@@ -177,6 +177,7 @@
         var rs = getComputedStyle(r)
         let delay = rs.getPropertyValue("--swap-duration")
         delay = delay.replace(new RegExp("ms", "ig"), "")
+        console.log(delay);
         delay = Number(delay)
 
         setTimeout(() => {
