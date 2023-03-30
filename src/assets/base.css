@@ -23,15 +23,6 @@
   --convert-btn-light: #ffc881;
   --convert-btn-dark: #792e02;
   --swap-btn: #5d51ff;
-
-  --swap-from-top: "";
-  --swap-from-right: "";
-  --swap-from-bottom: "";
-  --swap-from-left: "";
-  --swap-to-top: "";
-  --swap-to-right: "";
-  --swap-to-bottom: "";
-  --swap-to-left: "";
   --swap-duration: 500ms;
 }
 

@@ -19,10 +19,6 @@
             result: "",
         },
         isFetching: false,
-        swapCurr: {
-            from: { top: "", right: "", bottom: "", left:"" },
-            to: { top: "", right: "", bottom: "", left:"" },
-        }
     })
 
 //////// functions responding to fetchAPI()
