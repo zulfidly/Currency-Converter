@@ -173,16 +173,16 @@
         Fid.classList.add("swappingFrom_To")
         Tid.classList.add("swappingTo_From")
 
-        var r = document.querySelector(':root')
-        var rs = getComputedStyle(r)
-        let delay = rs.getPropertyValue("--swap-duration")
-        console.log(delay);
-        delay = delay.replace(new RegExp("[ms]", "ig"), "")
-        console.log(delay);
-        delay = Number(delay)
+        // var r = document.querySelector(':root')
+        // var rs = getComputedStyle(r)
+        // let delay = rs.getPropertyValue("--swap-duration")
+        // console.log(delay);
+        // delay = delay.replace(new RegExp("[ms]", "ig"), "")
+        // console.log(delay);
+        // delay = Number(delay)
 
         setTimeout(() => {
-            console.log(delay, 'setTimeout at swap currencies');
+            // console.log(delay, 'setTimeout at swap currencies');
             Fid.classList.remove("swappingFrom_To")
             Tid.classList.remove("swappingTo_From")
             document.getElementById("duplicateConvertTo").innerHTML = Fid.outerHTML
@@ -192,7 +192,7 @@
             mainObj.userSettings.convertFrom = w
             mainObj.userSettings.convertTo = q
             mainObj.isSwapping = false
-        }, delay)
+        }, 500)
     }
     
 </script>

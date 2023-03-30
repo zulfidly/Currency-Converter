@@ -23,7 +23,7 @@
   --convert-btn-light: #ffc881;
   --convert-btn-dark: #792e02;
   --swap-btn: #5d51ff;
-  --swap-duration: 500ms; /* in miliseconds only*/
+  --swap-duration: 0.5s; /* in miliseconds only*/
 }
 
 
