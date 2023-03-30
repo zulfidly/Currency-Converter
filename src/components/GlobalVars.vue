@@ -165,6 +165,8 @@
     export const swapCurrencies = () => {
         let Fid = document.getElementById("duplicateConvertFrom").firstElementChild
         let Tid = document.getElementById("duplicateConvertTo").firstElementChild
+        document.getElementById("duplicateConvertFrom").firstElementChild.classList.add("swappingFrom_To")
+        document.getElementById("duplicateConvertTo").firstElementChild.classList.add("swappingTo_From")
 
         let q = mainObj.userSettings.convertFrom.toString()
         let w = mainObj.userSettings.convertTo.toString()
@@ -176,8 +178,6 @@
         let delay = rs.getPropertyValue("--swap-duration")
         delay = Number(delay.replace(/ms/g, ""))
 
-        Fid.classList.add("swappingFrom_To")
-        Tid.classList.add("swappingTo_From")
         setTimeout(() => {
             Fid.classList.remove("swappingFrom_To")
             Tid.classList.remove("swappingTo_From")
