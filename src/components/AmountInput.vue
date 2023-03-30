@@ -72,7 +72,9 @@
         let delay = rs.getPropertyValue("--swap-duration")
         delay = Number(delay.replace(/ms/g, ""))
 
-        setTimeout(() => {
+        setTimeout(timeout, delay)
+
+        function timeout() {
             console.log('setTimeout at swap currencies');
             Fid.classList.remove("swappingFrom_To")
             Tid.classList.remove("swappingTo_From")
@@ -83,7 +85,7 @@
             mainObj.userSettings.convertFrom = w
             mainObj.userSettings.convertTo = q
             mainObj.isSwapping = false
-        }, delay)
+        }
     }
 </script>
 
