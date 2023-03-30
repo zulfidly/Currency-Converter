@@ -187,7 +187,6 @@
             Tid.classList.remove("swappingTo_From")
             document.getElementById("duplicateConvertTo").innerHTML = Fid.outerHTML
             document.getElementById("duplicateConvertFrom").innerHTML = Tid.outerHTML
-
         }, delay)
     }
     
