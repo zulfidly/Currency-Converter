@@ -26,7 +26,7 @@
             let offset = 0
             mainObj.allSymbols.forEach((x, ind) => {
                 if(symF == x.symbol || symT == x.symbol) {
-                    console.log('found', x.symbol, 'at ', ind);
+                    // console.log('found', x.symbol, 'at ', ind);
                     list.splice(ind-offset, 1)
                     offset++
                     mainObj.dynList = list
@@ -34,7 +34,7 @@
                 if(symF == x.symbol) mainObj.userSettings.countryFrom = x.description
                 if(symT == x.symbol) mainObj.userSettings.countryTo = x.description
             })
-            console.log(mainObj);
+            // console.log(mainObj);
         }
     )
     watch (

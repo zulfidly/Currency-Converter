@@ -19,6 +19,7 @@
             result: "",
         },
         isFetching: false,
+        isSwapping: false,
     })
 
 //////// functions responding to fetchAPI()
@@ -46,7 +47,7 @@
             mainObj.dynList = array
         },
         convertEndpoint : function(x) {
-            console.log(x);
+            // console.log(x);
             mainObj.fetched.lastUpdated = "last updated " + dateFormatter(x.date)
             mainObj.fetched.rate = rateStringFormatter(x.info.rate)
             mainObj.fetched.result = currencyFormatter(mainObj.userSettings.convertTo, x.result)
@@ -162,28 +163,6 @@
         let formatter = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long'})
         return formatter.format(new Date(d))
     }
-    export const swapCurrencies = () => {
-        let Fid = document.getElementById("duplicateConvertFrom").firstElementChild
-        let Tid = document.getElementById("duplicateConvertTo").firstElementChild
-        document.getElementById("duplicateConvertFrom").firstElementChild.classList.add("swappingFrom_To")
-        document.getElementById("duplicateConvertTo").firstElementChild.classList.add("swappingTo_From")
 
-        let q = mainObj.userSettings.convertFrom.toString()
-        let w = mainObj.userSettings.convertTo.toString()
-        mainObj.userSettings.convertFrom = w
-        mainObj.userSettings.convertTo = q
-
-        var r = document.querySelector(':root')
-        var rs = getComputedStyle(r)
-        let delay = rs.getPropertyValue("--swap-duration")
-        delay = Number(delay.replace(/ms/g, ""))
-
-        setTimeout(() => {
-            Fid.classList.remove("swappingFrom_To")
-            Tid.classList.remove("swappingTo_From")
-            document.getElementById("duplicateConvertTo").innerHTML = Fid.outerHTML
-            document.getElementById("duplicateConvertFrom").innerHTML = Tid.outerHTML
-        }, delay)
-    }
     
 </script>

@@ -1,23 +1,48 @@
 <script setup>
     import { ref, computed, watch } from 'vue';
     import { mainObj } from './GlobalVars.vue';
-    import { fetchAPI, swapCurrencies } from './GlobalVars.vue';
+    import { fetchAPI } from './GlobalVars.vue';
+    // import { swapCurrencies } from './GlobalVars.vue';
     import { buttonStyleIs, inputStyle, dashboardStyle, swapIconStyle } from './GlobalVars.vue';
     import ResultDashboard from './ResultDashboard.vue';
     import github from './icons/github.vue';
     import IconSwap from './icons/IconSwap.vue';
 
     const amtInput = ref("")
+
     watch(amtInput, ()=> mainObj.fetched.result = "")
 
+    const isConvertible = computed(() => {
+        let x = mainObj.userSettings.convertFrom
+        let y = mainObj.userSettings.convertTo
+        let z = mainObj.userSettings.amount
+        if(x && y && z) return true
+        else return false
+    })
+    const isSwappable = computed(() => {
+        let x = mainObj.userSettings.convertFrom
+        let y = mainObj.userSettings.convertTo
+        let z = mainObj.isSwapping
+        if(x && y && !z) return true
+        else return false
+    })
+    watch(
+        () => mainObj.userSettings.convertFrom,
+        () => {
+            mainObj.fetched.result = undefined
+            if(mainObj.userSettings.convertFrom && mainObj.userSettings.amount) {
+                const formatter = new Intl.NumberFormat(undefined, {currency: `${mainObj.userSettings.convertFrom}`, style:"currency"})
+                mainObj.userSettings.cFromFormattedForDisplay = formatter.format(amtInput.value)
+            }
+        }
+    )
+
     const getConversion = () => {
-        console.log(mainObj);
         let base = mainObj.userSettings.convertFrom.toLowerCase()
         let res = mainObj.userSettings.convertTo.toLowerCase()
         let amt = mainObj.userSettings.amount
         let str = "https://api.exchangerate.host/convert/?" + `from=${base}` + `&to=${res}` + `&amount=${amt}`
         fetchAPI(`convertEndpoint`, str)
-        // console.log(mainObj.userSettings);
     }
     function userInputChecker(e) {
         let regex = new RegExp("[0-9]", 'g')
@@ -35,30 +60,31 @@
         }
         console.log(mainObj.userSettings);
     }
-    watch(
-        () => mainObj.userSettings.convertFrom,
-        () => {
-            mainObj.fetched.result = undefined
-            if(mainObj.userSettings.convertFrom && mainObj.userSettings.amount) {
-                const formatter = new Intl.NumberFormat(undefined, {currency: `${mainObj.userSettings.convertFrom}`, style:"currency"})
-                mainObj.userSettings.cFromFormattedForDisplay = formatter.format(amtInput.value)
-            }
-        }
-    )
-    const isConvertible = computed(() => {
-        let x = mainObj.userSettings.convertFrom
-        let y = mainObj.userSettings.convertTo
-        let z = mainObj.userSettings.amount
-        if(x && y && z) return true
-        else return false
-    })
-    const isSwappable = computed(() => {
-        let x = mainObj.userSettings.convertFrom
-        let y = mainObj.userSettings.convertTo
-        if(x && y) return true
-        else return false
+    const swapCurrencies = () => {
+        mainObj.isSwapping = true
+        let Fid = document.getElementById("duplicateConvertFrom").firstElementChild
+        let Tid = document.getElementById("duplicateConvertTo").firstElementChild
+        document.getElementById("duplicateConvertFrom").firstElementChild.classList.add("swappingFrom_To")
+        document.getElementById("duplicateConvertTo").firstElementChild.classList.add("swappingTo_From")
 
-    })
+        var r = document.querySelector(':root')
+        var rs = getComputedStyle(r)
+        let delay = rs.getPropertyValue("--swap-duration")
+        delay = Number(delay.replace(/ms/g, ""))
+
+        setTimeout(() => {
+            console.log('setTimeout at swap currencies');
+            Fid.classList.remove("swappingFrom_To")
+            Tid.classList.remove("swappingTo_From")
+            document.getElementById("duplicateConvertTo").innerHTML = Fid.outerHTML
+            document.getElementById("duplicateConvertFrom").innerHTML = Tid.outerHTML
+            let q = mainObj.userSettings.convertFrom.toString()
+            let w = mainObj.userSettings.convertTo.toString()
+            mainObj.userSettings.convertFrom = w
+            mainObj.userSettings.convertTo = q
+            mainObj.isSwapping = false
+        }, delay)
+    }
 </script>
 
 <template>
