@@ -32,7 +32,10 @@
                 mainObj.isFetching = false
              }) 
             // .then((response) =>  eval(`${fu}(response.data)`) )
-            .catch((error) => console.log(error) )
+            .catch((error) => {
+                console.log(error) 
+                mainObj.fetched.result = "-try again-"
+            })
     }
     const funcLib = {
         constructMainObj : function(x) {
@@ -51,7 +54,7 @@
             mainObj.fetched.lastUpdated = "last updated " + dateFormatter(x.date)
             mainObj.fetched.rate = rateStringFormatter(x.info.rate)
             mainObj.fetched.result = currencyFormatter(mainObj.userSettings.convertTo, x.result)
-            console.log(mainObj);
+            // console.log(mainObj);
         },
     }
 
@@ -163,6 +166,30 @@
         let formatter = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long'})
         return formatter.format(new Date(d))
     }
+    export const swapCurrencies = () => {
+        mainObj.isSwapping = true
+        let Fid = document.getElementById("duplicateConvertFrom").firstElementChild
+        let Tid = document.getElementById("duplicateConvertTo").firstElementChild
+        Fid.classList.add("swappingFrom_To")
+        Tid.classList.add("swappingTo_From")
 
+        var r = document.querySelector(':root')
+        var rs = getComputedStyle(r)
+        let delay = rs.getPropertyValue("--swap-duration")
+        delay = Number(delay.replace(new RegExp("ms", "ig"), ""))
+
+        setTimeout(() => {
+            // console.log(delay, 'setTimeout at swap currencies');
+            Fid.classList.remove("swappingFrom_To")
+            Tid.classList.remove("swappingTo_From")
+            document.getElementById("duplicateConvertTo").innerHTML = Fid.outerHTML
+            document.getElementById("duplicateConvertFrom").innerHTML = Tid.outerHTML
+            let q = mainObj.userSettings.convertFrom.toString()
+            let w = mainObj.userSettings.convertTo.toString()
+            mainObj.userSettings.convertFrom = w
+            mainObj.userSettings.convertTo = q
+            mainObj.isSwapping = false
+        }, delay)
+    }
     
 </script>

@@ -2,7 +2,7 @@
     import { ref, computed, watch } from 'vue';
     import { mainObj } from './GlobalVars.vue';
     import { fetchAPI } from './GlobalVars.vue';
-    // import { swapCurrencies } from './GlobalVars.vue';
+    import { swapCurrencies } from './GlobalVars.vue';
     import { buttonStyleIs, inputStyle, dashboardStyle, swapIconStyle } from './GlobalVars.vue';
     import ResultDashboard from './ResultDashboard.vue';
     import github from './icons/github.vue';
@@ -55,38 +55,12 @@
             mainObj.userSettings.amount = str.toString()
             mainObj.userSettings.cFromFormattedForDisplay = formatter.format(amtInput.value)
         } else {
-            mainObj.userSettings.cFromFormattedForDisplay = "-unknown input-"
+            mainObj.userSettings.cFromFormattedForDisplay = "-input required-"
             mainObj.userSettings.amount = 0
         }
-        console.log(mainObj.userSettings);
+        // console.log(mainObj.userSettings);
     }
-    const swapCurrencies = () => {
-        mainObj.isSwapping = true
-        let Fid = document.getElementById("duplicateConvertFrom").firstElementChild
-        let Tid = document.getElementById("duplicateConvertTo").firstElementChild
-        document.getElementById("duplicateConvertFrom").firstElementChild.classList.add("swappingFrom_To")
-        document.getElementById("duplicateConvertTo").firstElementChild.classList.add("swappingTo_From")
 
-        var r = document.querySelector(':root')
-        var rs = getComputedStyle(r)
-        let delay = rs.getPropertyValue("--swap-duration")
-        delay = Number(delay.replace(/ms/g, ""))
-
-        setTimeout(timeout, 500)
-
-        function timeout() {
-            console.log(delay, 'setTimeout at swap currencies');
-            Fid.classList.remove("swappingFrom_To")
-            Tid.classList.remove("swappingTo_From")
-            document.getElementById("duplicateConvertTo").innerHTML = Fid.outerHTML
-            document.getElementById("duplicateConvertFrom").innerHTML = Tid.outerHTML
-            let q = mainObj.userSettings.convertFrom.toString()
-            let w = mainObj.userSettings.convertTo.toString()
-            mainObj.userSettings.convertFrom = w
-            mainObj.userSettings.convertTo = q
-            mainObj.isSwapping = false
-        }
-    }
 </script>
 
 <template>
