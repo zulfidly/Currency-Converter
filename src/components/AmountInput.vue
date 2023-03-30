@@ -72,10 +72,10 @@
         let delay = rs.getPropertyValue("--swap-duration")
         delay = Number(delay.replace(/ms/g, ""))
 
-        setTimeout(timeout, delay)
+        setTimeout(timeout, 500)
 
         function timeout() {
-            console.log('setTimeout at swap currencies');
+            console.log(delay, 'setTimeout at swap currencies');
             Fid.classList.remove("swappingFrom_To")
             Tid.classList.remove("swappingTo_From")
             document.getElementById("duplicateConvertTo").innerHTML = Fid.outerHTML
