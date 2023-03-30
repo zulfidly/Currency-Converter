@@ -20,8 +20,8 @@
         },
         isFetching: false,
         swapCurr: {
-            from: { top: "", left:"" },
-            to: { top: "", left:"" },
+            from: { top: "", right: "", bottom: "", left:"" },
+            to: { top: "", right: "", bottom: "", left:"" },
         }
     })
 
@@ -74,8 +74,13 @@
         clear: ["absolute right-[10px] py-1 px-4 border border-2 border-[var(--color-border)] rounded-lg active:scale-90 ease-out duration-150"],
         convertBtn: [`px-6 py-2 w-auto h-auto rounded-full text-2xl flex items-center tracking-widest transition-all ease-out duration-700 bg-[var(--color-background-mute)]`],
         convertBtnActive:    [" z-0 bg-[var(--color-bg-convert-btn)]"],
-        convertBtnNotActive: ["-z-10"],
+        // convertBtnNotActive: ["-z-10"],
     }
+//////// dashboard stylings
+    export const swapIconStyle = {
+            init : ["absolute left-2 mr-4 transition-all ease-out duration-700 fill-[var(--color-background-mute)]"],
+            swapOn: ["fill-[var(--swap-btn)]"],
+        }
 
 //////// z-indexes
     export const tide = {
@@ -115,11 +120,9 @@
         amtinput: ["bg-[var(--color-background-mute)] text-center text-xl w-full h-[50px] rounded-r-md tracking-widest flex items-center placeholder:text-center placeholder:text-sm italic"],
     }
 
-
-
-//////// mapping "https://api.exchangerate.host/symbols/"
+//////// dashboard stylings
     export const dashboardStyle = {
-        // outest: ["lg:col-span-2"],
+        outest: ["lg:col-span-2"],
         // outestHide: ["opacity-0"],
         ctnr: ["grid lg:block grid-cols-1 gap-y-4 mt-5 lg:col-span-2"],
         convertBtnDiv: ["flex justify-center"],
@@ -163,6 +166,29 @@
         let formatter = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long'})
         return formatter.format(new Date(d))
     }
+    export const swapCurrencies = () => {
+        let Fid = document.getElementById("duplicateConvertFrom").firstElementChild
+        let Tid = document.getElementById("duplicateConvertTo").firstElementChild
 
+        let q = mainObj.userSettings.convertFrom.toString()
+        let w = mainObj.userSettings.convertTo.toString()
+        mainObj.userSettings.convertFrom = w
+        mainObj.userSettings.convertTo = q
 
+        var r = document.querySelector(':root')
+        var rs = getComputedStyle(r)
+        let delay = rs.getPropertyValue("--swap-duration")
+        delay = Number(delay.replace(/ms/g, ""))
+
+        Fid.classList.add("swappingFrom_To")
+        Tid.classList.add("swappingTo_From")
+        setTimeout(() => {
+            Fid.classList.remove("swappingFrom_To")
+            Tid.classList.remove("swappingTo_From")
+            document.getElementById("duplicateConvertTo").innerHTML = Fid.outerHTML
+            document.getElementById("duplicateConvertFrom").innerHTML = Tid.outerHTML
+
+        }, delay)
+    }
+    
 </script>

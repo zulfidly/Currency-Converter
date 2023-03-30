@@ -60,7 +60,7 @@
         mainObj.fetched = {}
         mainObj.userSettings.convertTo = undefined
         mainObj.userSettings.countryTo = undefined
-        document.getElementById("duplicateConvertTo").innerHTML = ""
+        document.getElementById("duplicateConvertTo").innerHTML = `<div class="w-full h-14"></div>`
     }
 
     const onFocusInput = () => {
@@ -93,7 +93,9 @@
                 </li>
             </ul>
         </div>
-        <div id="duplicateConvertTo" v-show="!isListConToDisplay" class="h-16"></div>
+        <div id="duplicateConvertTo" v-show="!isListConToDisplay" class="h-16">
+            <div class="w-full h-14"></div>
+        </div>
     </div>
 
 

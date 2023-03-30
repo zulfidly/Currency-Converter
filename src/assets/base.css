@@ -20,9 +20,21 @@
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 
-  --convert-btn-light: #FFA533;
-  --convert-btn-dark: #ad470c;
+  --convert-btn-light: #ffc881;
+  --convert-btn-dark: #792e02;
+  --swap-btn: #5d51ff;
+
+  --swap-from-top: "";
+  --swap-from-right: "";
+  --swap-from-bottom: "";
+  --swap-from-left: "";
+  --swap-to-top: "";
+  --swap-to-right: "";
+  --swap-to-bottom: "";
+  --swap-to-left: "";
+  --swap-duration: 500ms;
 }
+
 
 /* semantic color variables for this project */
 :root {

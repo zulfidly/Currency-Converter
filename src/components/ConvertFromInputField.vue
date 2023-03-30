@@ -58,7 +58,7 @@
         mainObj.userSettings.countryFrom = undefined
         mainObj.userSettings.cFromFormattedForDisplay = undefined
 
-        document.getElementById("duplicateConvertFrom").innerHTML = ""
+        document.getElementById("duplicateConvertFrom").innerHTML = `<div class="w-full h-14"></div>`
     }
 
     const onFocusInput = () => {
