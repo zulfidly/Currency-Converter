@@ -176,10 +176,11 @@
         var r = document.querySelector(':root')
         var rs = getComputedStyle(r)
         let delay = rs.getPropertyValue("--swap-duration")
-        delay = Number(delay.replace(new RegExp("ms", "ig"), ""))
+        delay = delay.replace(new RegExp("ms", "ig"), "")
+        delay = Number(delay)
 
         setTimeout(() => {
-            // console.log(delay, 'setTimeout at swap currencies');
+            console.log(delay, 'setTimeout at swap currencies');
             Fid.classList.remove("swappingFrom_To")
             Tid.classList.remove("swappingTo_From")
             document.getElementById("duplicateConvertTo").innerHTML = Fid.outerHTML
