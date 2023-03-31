@@ -36,7 +36,7 @@
  ```
  watch(amtInput, ()=> mainObj.fetched.result = "")
  ```
- or when referring to only a particular reactive state in an object
+- or when referring to only a particular reactive state in an object
  ```
      watch(
         () => mainObj.userSettings.convertFrom,
@@ -62,7 +62,7 @@
     }
 ```
 
-### reformatting date received from API as: YYYY-MM-DD to DD-MMM-YYYY
+### reformatting date received from API : YYYY-MM-DD to DD MMM YYYY
 ```    
 const dateFormatter = (d) => {
         let formatter = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long'})
