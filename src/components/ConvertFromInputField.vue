@@ -78,6 +78,8 @@
 
 <template>
     <div :class="[convFromCtnr.outestInit, isListConFromDisplay?convFromCtnr.onFocusInput:convFromCtnr.outest]">
+        <div class="absolute top-0  w-full h-[100svh] backdrop-blur" v-show="isListConFromDisplay"></div>
+
         <div :class="[convFromCtnr.inner1]">
             <div :class="[convFromCtnr.inner2]">
                 <IconList v-if="!isListConFromDisplay" @mousedown="isListConFromDisplay=!isListConFromDisplay" />
@@ -90,7 +92,8 @@
                     <template #btn>Close</template>
                 </Btn>
             </div>
-    
+
+
             <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConFromDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
                 <li :class="[ulStyleIs.noResult]" v-show="userInputConFrom!=='' && mainObj.dynList.length==0">No results</li>
                 <li v-for="list in mainObj.dynList" :class="ulStyleIs.li">

@@ -77,6 +77,8 @@
 
 <template>
     <div :class="[convFromCtnr.outestInit, isListConToDisplay?convFromCtnr.onFocusInput:convFromCtnr.outest]">
+        <div class="absolute top-0  w-full h-[100svh] backdrop-blur" v-show="isListConToDisplay"></div>
+
         <div :class="[convFromCtnr.inner1]">
             <div :class="[convFromCtnr.inner2]">
                 <IconList v-if="!isListConToDisplay" @mousedown="isListConToDisplay=!isListConToDisplay" />

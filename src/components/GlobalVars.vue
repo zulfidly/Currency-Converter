@@ -74,7 +74,7 @@
         clear: ["absolute right-[10px] py-1 px-4 border border-2 border-[var(--color-border)] rounded-lg active:scale-90 ease-out duration-150"],
         convertBtn: [`px-6 py-2 w-auto h-auto rounded-full text-2xl font-normal  flex items-center tracking-widest transition-all ease-out duration-700`],
         convertBtnActive:    [" z-0 text-[var(--color-text)] bg-[var(--color-bg-convert-btn)]"],
-        convertBtnNotActive: ["-z-10 text-[var(--color-background)] bg-[var(--color-background-mute)]"],
+        convertBtnNotActive: ["z-0 text-[var(--color-background)] bg-[var(--color-background-mute)]"],
     }
 //////// dashboard stylings
     export const swapIconStyle = {
