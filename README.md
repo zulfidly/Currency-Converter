@@ -1,7 +1,5 @@
-# currex
-[![Netlify Status](https://api.netlify.com/api/v1/badges/de4f0402-6307-498c-8c38-af31e3f0fea5/deploy-status)](https://app.netlify.com/sites/fidly-currex/deploys)
 # [Currency Converter](https://fidly-currex.netlify.app/) 
-# [API provided by exchangerate.host](https://exchangerate.host/#/)
+## [API provided by exchangerate.host](https://exchangerate.host/#/)
 
 ## Description
  - a [VueJS](https://vuejs.org/guide/introduction.html) app (with darkmode)
