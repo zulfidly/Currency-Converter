@@ -31,12 +31,12 @@
                 funcLib[fu](response.data)
                 mainObj.isFetching = false
              }) 
-            // .then((response) =>  eval(`${fu}(response.data)`) )
-            .catch((error) => {
-                console.log(error) 
-                mainObj.fetched.result = "-try again-"
-            })
+             .catch((error) => {
+                 console.log(error) 
+                 mainObj.fetched.result = "-try again-"
+                })
     }
+            // .then((response) =>  eval(`${fu}(response.data)`) )
     const funcLib = {
         constructMainObj : function(x) {
             let y = new Map(Object.entries(x.symbols))
