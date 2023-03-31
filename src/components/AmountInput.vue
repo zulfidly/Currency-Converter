@@ -80,7 +80,7 @@
                 <button :disabled="!isSwappable" @click="swapCurrencies" :class="[swapIconStyle.init, isSwappable?swapIconStyle.swapOn:'']">
                     <IconSwap />
                 </button>
-                <button :disabled="!isConvertible" @click="getConversion" :class="[buttonStyleIs.convertBtn, isConvertible?buttonStyleIs.convertBtnActive:'']">
+                <button :disabled="!isConvertible" @click="getConversion" :class="[buttonStyleIs.convertBtn, isConvertible?buttonStyleIs.convertBtnActive:buttonStyleIs.convertBtnNotActive]">
                     Convert
                 </button>
             </template>

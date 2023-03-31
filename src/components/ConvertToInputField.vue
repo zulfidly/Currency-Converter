@@ -4,17 +4,19 @@
     import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "./GlobalVars.vue"
     import Btn from "./Button.vue"
     import SearchIcon from "./icons/SearchIcon.vue"
+    import IconList from "./icons/IconList.vue";
 
     const userInputConTo = ref()
     var isListConToDisplay = ref(false)
 
-    const setConvertFromSymbol = (e) => {
+    const setConvertToSymbol = (e) => {
         let x = e.target.parentElement
         let id = e.target.parentElement.id;
         mainObj.userSettings.convertTo = id
         document.getElementById("duplicateConvertTo").innerHTML = `<div class="w-full h-14 px-2 flex justify-center items-center gap-x-3">${x.innerHTML}</div>`
         // console.log(x.outerHTML);
         userInputConTo.value = ""
+        isListConToDisplay.value = false
     }
     watch (
         () => mainObj.userSettings.convertTo,
@@ -64,8 +66,12 @@
     }
 
     const onFocusInput = () => {
-        isListConToDisplay.value = !isListConToDisplay.value
+        isListConToDisplay.value = true
         userInputConTo.value = ""
+    }
+    const blurInput = () => {
+        let x = document.getElementById("inputToField")
+        x.blur()
     }
 </script>
 
@@ -73,17 +79,21 @@
     <div :class="[convFromCtnr.outestInit, isListConToDisplay?convFromCtnr.onFocusInput:convFromCtnr.outest]">
         <div :class="[convFromCtnr.inner1]">
             <div :class="[convFromCtnr.inner2]">
-                <SearchIcon/>
-                <input @focus="onFocusInput" v-on:blur="onFocusInput" v-model="userInputConTo" :class="[inputStyle.symbolSearchInput]" placeholder="Convert to" type="text"/>
-                <Btn @mousedown="clearInput" :class="[buttonStyleIs.clear]">
+                <IconList v-if="!isListConToDisplay" @mousedown="isListConToDisplay=!isListConToDisplay" />
+                <SearchIcon v-else @mousedown="isListConToDisplay=true"/>
+                <input id="inputToField" @focus="onFocusInput" v-model="userInputConTo" :class="[inputStyle.symbolSearchInput]" placeholder="Convert to" type="text"/>
+                <Btn v-if="!isListConToDisplay" @mousedown="clearInput" :class="[buttonStyleIs.clear]">
                     <template #btn>Reset</template>
+                </Btn>
+                <Btn v-else @mousedown="isListConToDisplay=!isListConToDisplay; userInputConTo = ''" :class="[buttonStyleIs.clear]">
+                    <template #btn>Close</template>
                 </Btn>
             </div>
     
-            <ul :class="[ulStyleIs.init, isListConToDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
+            <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConToDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
                 <li :class="[ulStyleIs.noResult]" v-show="userInputConTo!=='' && mainObj.dynList.length==0">No results</li>
                 <li v-for="list in mainObj.dynList" :class="ulStyleIs.li">
-                    <Btn @mousedown="setConvertFromSymbol" :id="list.symbol" :class="[buttonStyleIs.dynDropList, isListConToDisplay?tide.high:tide.low]" >
+                    <Btn @mousedown="setConvertToSymbol" :id="list.symbol" :class="[buttonStyleIs.dynDropList, isListConToDisplay?tide.high:tide.low]" >
                         <template #btn>
                             <img class="border border-gray-900" :src="list.flagURL" :alt="list.description"/>
                             <span :class="symbolTextStyleIs.allsymbols"> {{ list.symbol }} </span>

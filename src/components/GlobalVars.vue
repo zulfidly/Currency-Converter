@@ -72,9 +72,9 @@
         // symbolSearchInput: ["bg-[var(--color-background-mute)] text-lg w-full h-[50px] pl-14 rounded-md tracking-wider"],
         dynDropList: ["w-full h-14 px-2 flex justify-start items-center gap-x-3 rounded-lg lg:hover:bg-[var(--color-background-soft)] lg:hover:scale-[0.99] ease-out duration-200"],
         clear: ["absolute right-[10px] py-1 px-4 border border-2 border-[var(--color-border)] rounded-lg active:scale-90 ease-out duration-150"],
-        convertBtn: [`px-6 py-2 w-auto h-auto rounded-full text-2xl flex items-center tracking-widest transition-all ease-out duration-700 bg-[var(--color-background-mute)]`],
-        convertBtnActive:    [" z-0 bg-[var(--color-bg-convert-btn)]"],
-        // convertBtnNotActive: ["-z-10"],
+        convertBtn: [`px-6 py-2 w-auto h-auto rounded-full text-2xl font-normal  flex items-center tracking-widest transition-all ease-out duration-700`],
+        convertBtnActive:    [" z-0 text-[var(--color-text)] bg-[var(--color-bg-convert-btn)]"],
+        convertBtnNotActive: ["-z-10 text-[var(--color-background)] bg-[var(--color-background-mute)]"],
     }
 //////// dashboard stylings
     export const swapIconStyle = {
@@ -98,7 +98,7 @@
 
 //////// UL styling
     export const ulStyleIs = {
-        init: ["absolute w-full max-h-[80vh] border border-1 top-full overflow-auto rounded-lg grid grid-cols-1 bg-[var(--color-background-mute)]"],
+        init: ["absolute w-full max-h-[80vh] border border-1 top-full overflow-auto rounded-lg grid grid-cols-1 bg-[var(--color-background-soft)]"],
         show: ["opacity-100 z-20 left-0 transition-all ease-out duration-200"],
         hide: ["opacity-0 -z-20 left-full"],
         li: ["px-4"],
@@ -116,7 +116,7 @@
 
 //////// amount input field styling
     export const inputStyle = {
-        symbolSearchInput: ["bg-[var(--color-background-mute)] text-lg w-full h-[50px] pl-14 rounded-md tracking-wider placeholder:italic text-sm"],
+        symbolSearchInput: ["bg-[var(--color-background-mute)] text-xl w-full h-[50px] pl-14 rounded-md tracking-wider placeholder:italic placeholder:text-sm"],
         amtinput: ["bg-[var(--color-background-mute)] text-center text-xl w-full h-[50px] rounded-r-md tracking-widest flex items-center placeholder:text-center placeholder:text-sm italic"],
     }
 

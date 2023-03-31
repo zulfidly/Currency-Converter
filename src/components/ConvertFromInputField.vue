@@ -4,6 +4,7 @@
     import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "./GlobalVars.vue"
     import Btn from "./Button.vue"
     import SearchIcon from "./icons/SearchIcon.vue"
+    import IconList from "./icons/IconList.vue"
 
     const userInputConFrom = ref()
     var isListConFromDisplay = ref(false)
@@ -11,9 +12,11 @@
     const setConvertFromSymbol = (e) => {
         let x = e.target.parentElement
         let id = e.target.parentElement.id;
+        console.log(x.parentElement.parentElement);
         mainObj.userSettings.convertFrom = id
         document.getElementById("duplicateConvertFrom").innerHTML = `<div class="w-full h-14 px-2 flex justify-center items-center gap-x-3">${x.innerHTML}</div>`
         userInputConFrom.value = ""
+        isListConFromDisplay.value = false
 
     }
     watch (
@@ -62,24 +65,33 @@
     }
 
     const onFocusInput = () => {
-        isListConFromDisplay.value = !isListConFromDisplay.value
+        isListConFromDisplay.value = true
+        // isListConFromDisplay.value = !isListConFromDisplay.value
         userInputConFrom.value = ""
     }
- 
+    const blurInput = () => {
+        let x = document.getElementById("inputFormField")
+        x.blur()
+    }
+
 </script>
 
 <template>
     <div :class="[convFromCtnr.outestInit, isListConFromDisplay?convFromCtnr.onFocusInput:convFromCtnr.outest]">
         <div :class="[convFromCtnr.inner1]">
             <div :class="[convFromCtnr.inner2]">
-                <SearchIcon/>
-                <input @focus="onFocusInput" v-on:blur="onFocusInput" v-model="userInputConFrom" :class="[inputStyle.symbolSearchInput]" placeholder="Convert from" type="text"/>
-                <Btn @mousedown="clearInput" :class="[buttonStyleIs.clear]">
+                <IconList v-if="!isListConFromDisplay" @mousedown="isListConFromDisplay=!isListConFromDisplay" />
+                <SearchIcon v-else @mousedown="isListConFromDisplay=true"/>
+                <input id="inputFormField" @focus="onFocusInput" v-model="userInputConFrom" :class="[inputStyle.symbolSearchInput]" placeholder="Convert from" type="text"/>
+                <Btn v-if="!isListConFromDisplay" @mousedown="clearInput" :class="[buttonStyleIs.clear]">
                     <template #btn>Reset</template>
+                </Btn>
+                <Btn v-else @mousedown="isListConFromDisplay=!isListConFromDisplay; userInputConFrom = ''" :class="[buttonStyleIs.clear]">
+                    <template #btn>Close</template>
                 </Btn>
             </div>
     
-            <ul :class="[ulStyleIs.init, isListConFromDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
+            <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConFromDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
                 <li :class="[ulStyleIs.noResult]" v-show="userInputConFrom!=='' && mainObj.dynList.length==0">No results</li>
                 <li v-for="list in mainObj.dynList" :class="ulStyleIs.li">
                     <Btn @mousedown="setConvertFromSymbol" :id="list.symbol" :class="[buttonStyleIs.dynDropList, isListConFromDisplay?tide.high:tide.low]" >
