@@ -1,30 +1,37 @@
 # currex
 [![Netlify Status](https://api.netlify.com/api/v1/badges/de4f0402-6307-498c-8c38-af31e3f0fea5/deploy-status)](https://app.netlify.com/sites/fidly-currex/deploys)
+# [Currency Converter](https://fidly-currex.netlify.app/) 
 
-This template should help get you started developing with Vue 3 in Vite.
+## Description
+ - a [VueJS](https://vuejs.org/guide/introduction.html) app (with darkmode)
+ - an attempt on this [tutorial](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ) by [frontendmentor.io](https://www.frontendmentor.io/)
+ 
+ ### Gaining usage understanding of :
+ - v-if, v-else, v-bind, v-show directives
+ - the @click event listener
+ - the @touchstart event listener
+ - form @submit.prevent
+ - the slot tag, and v-slot
+ 
+ ### Non/Reactive components/properties used :
+ - ref() & reactive()
+ - watchEffects
+ - computed property
+ - onBeforeMount
+ 
+### Routing components :
+- useRoute() to capture link when browser is clicked to go back/forward
+- useRouter() to update the previous/next path from router(index.js)
+- RouterLink
+- RouterView
+- the :to binding 
 
-## Recommended IDE Setup
+### Transition components used :
+- the Transition tag
+- toast-enter-active (with @keyframes)
+- toast-leave-active (with @keyframes)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Draggable element used :
+- elements created with its SVG contents precisely scaled
+- coded in Vanilla JavaScript 
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
