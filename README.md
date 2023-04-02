@@ -4,6 +4,7 @@
 ## Description
  - a [VueJS](https://vuejs.org/guide/introduction.html) app (with darkmode)
  - an attempt on a tutorial by [Sigma School](https://sigmaschool.co/)
+ - styled with [TailwindCSS](https://tailwindcss.com/) framework
  
  ### Gaining usage understanding of :
  - v-if, v-else, v-bind, v-show directives
