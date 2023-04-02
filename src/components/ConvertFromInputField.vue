@@ -70,7 +70,7 @@
         userInputConFrom.value = ""
     }
     const blurInput = () => {
-        let x = document.getElementById("inputFormField")
+        let x = document.getElementById("inputFromField")
         x.blur()
     }
 
@@ -78,13 +78,13 @@
 
 <template>
     <div :class="[convFromCtnr.outestInit, isListConFromDisplay?convFromCtnr.onFocusInput:convFromCtnr.outest]">
-        <div class="absolute top-0  w-full h-[100svh] backdrop-blur" v-show="isListConFromDisplay"></div>
+        <div class="absolute top-0  w-[100vw] h-[100svh] backdrop-blur" v-show="isListConFromDisplay"></div>
 
         <div :class="[convFromCtnr.inner1]">
             <div :class="[convFromCtnr.inner2]">
                 <IconList v-if="!isListConFromDisplay" @mousedown="isListConFromDisplay=!isListConFromDisplay" />
                 <SearchIcon v-else @mousedown="isListConFromDisplay=true"/>
-                <input id="inputFormField" @focus="onFocusInput" v-model="userInputConFrom" :class="[inputStyle.symbolSearchInput]" placeholder="Convert from" type="text"/>
+                <input id="inputFromField" @focus="onFocusInput" v-model="userInputConFrom" :class="[inputStyle.symbolSearchInput]" placeholder="Convert from" type="text"/>
                 <Btn v-if="!isListConFromDisplay" @mousedown="clearInput" :class="[buttonStyleIs.clear]">
                     <template #btn>Reset</template>
                 </Btn>

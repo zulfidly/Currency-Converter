@@ -48,7 +48,7 @@
     )
 ```
 
-### formatting currency symbols & number achieved as following :
+### formatting of currency symbols & dates are achieved as following :
 - credits to [Web Dev Simplified @ YouTube](https://www.youtube.com/watch?v=4oGWpTAY_hc)
 ```
     const currencyFormatter = (symbol, amount) => {

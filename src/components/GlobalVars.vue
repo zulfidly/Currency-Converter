@@ -173,12 +173,18 @@
         Fid.classList.add("swappingFrom_To")
         Tid.classList.add("swappingTo_From")
 
-        // var r = document.querySelector(':root')
-        // var rs = getComputedStyle(r)
-        // let delay = rs.getPropertyValue("--swap-duration")
-        // console.log(delay);
-        // delay = delay.replace(new RegExp("[ms]", "ig"), "")
-        // console.log(delay);
+        var r = document.querySelector(':root')
+        var rs = getComputedStyle(r)
+        let delay = rs.getPropertyValue("--swap-duration")
+        console.log(delay);
+        if(delay.includes("ms")) {
+            delay = Number(delay.replace(new RegExp("[ms]", "ig"), ""))
+        } else if(delay.includes("s")){
+            delay = Number(delay.replace(new RegExp("[s]", "ig"), "")) * 1000
+        } else { console.log('invalid time format in CSS');}
+
+
+        console.log(delay);
         // delay = Number(delay)
 
         setTimeout(() => {
@@ -192,7 +198,7 @@
             mainObj.userSettings.convertFrom = w
             mainObj.userSettings.convertTo = q
             mainObj.isSwapping = false
-        }, 500)
+        }, delay)
     }
     
 </script>
