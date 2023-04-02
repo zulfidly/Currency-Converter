@@ -1,3 +1,6 @@
+<script setup>
+    import { headerStyleIs } from '../GlobalVars.vue';
+</script>
 <template>
     <button>
         <a href="https://exchangerate.host/#/#docs" target="_blank">
@@ -111,14 +114,6 @@
                 </g>
             </svg>
         </a>
-        <!-- <span class="absolute w-full h-full top-0 left-0"
-            @touchstart="openNewTab('https://exchangerate.host/#/#docs')"
-            @click="openNewTab('https://exchangerate.host/#/#docs')"
-        ></span> -->
     </button>
 </template>
 
-<script setup>
-    import { headerStyleIs } from '../GlobalVars.vue';
-    // let openNewTab = (url) => { window.open(url, "_blank", "noreferrer") }
-</script>

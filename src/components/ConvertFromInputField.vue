@@ -12,7 +12,7 @@
     const setConvertFromSymbol = (e) => {
         let x = e.target.parentElement
         let id = e.target.parentElement.id;
-        console.log(x.parentElement.parentElement);
+        // console.log(x.parentElement.parentElement);
         mainObj.userSettings.convertFrom = id
         document.getElementById("duplicateConvertFrom").innerHTML = `<div class="w-full h-14 px-2 flex justify-center items-center gap-x-3">${x.innerHTML}</div>`
         userInputConFrom.value = ""
@@ -78,7 +78,7 @@
 
 <template>
     <div :class="[convFromCtnr.outestInit, isListConFromDisplay?convFromCtnr.onFocusInput:convFromCtnr.outest]">
-        <div class="absolute top-0  w-[100vw] h-[100svh] backdrop-blur" v-show="isListConFromDisplay"></div>
+        <div class="absolute left-1/2 lg:left-full -translate-x-1/2 w-[100vw] h-[100svh] backdrop-blur" v-show="isListConFromDisplay"></div>
 
         <div :class="[convFromCtnr.inner1]">
             <div :class="[convFromCtnr.inner2]">

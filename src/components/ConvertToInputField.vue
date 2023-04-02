@@ -77,7 +77,7 @@
 
 <template>
     <div :class="[convFromCtnr.outestInit, isListConToDisplay?convFromCtnr.onFocusInput:convFromCtnr.outest]">
-        <div class="absolute right-0 w-[100vw] h-[100svh] backdrop-blur" v-show="isListConToDisplay"></div>
+        <div class="absolute left-1/2 -translate-x-1/2 lg:left-0 lg:right-full w-[100vw] h-[100svh] backdrop-blur" v-show="isListConToDisplay"></div>
 
         <div :class="[convFromCtnr.inner1]">
             <div :class="[convFromCtnr.inner2]">

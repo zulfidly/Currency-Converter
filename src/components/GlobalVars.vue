@@ -170,8 +170,11 @@
         mainObj.isSwapping = true
         let Fid = document.getElementById("duplicateConvertFrom").firstElementChild
         let Tid = document.getElementById("duplicateConvertTo").firstElementChild
-        Fid.classList.add("swappingFrom_To")
-        Tid.classList.add("swappingTo_From")
+        let temp = ["swappingFrom_To", "swappingTo_From"]
+        let random1 = Math.floor(Math.random() * temp.length)
+        let random2 = Math.floor(Math.random() * temp.length)
+        Fid.classList.add(temp[random1])
+        Tid.classList.add(temp[random2])
 
         var r = document.querySelector(':root')
         var rs = getComputedStyle(r)
@@ -190,6 +193,8 @@
         setTimeout(() => {
             // console.log(delay, 'setTimeout at swap currencies');
             Fid.classList.remove("swappingFrom_To")
+            Fid.classList.remove("swappingTo_From")
+            Tid.classList.remove("swappingFrom_To")
             Tid.classList.remove("swappingTo_From")
             document.getElementById("duplicateConvertTo").innerHTML = Fid.outerHTML
             document.getElementById("duplicateConvertFrom").innerHTML = Tid.outerHTML

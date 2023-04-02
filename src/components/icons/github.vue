@@ -17,20 +17,9 @@
                 </g>
             </svg>
         </a>
-
-        <!-- <span class="absolute w-full h-full top-0 left-0"
-            @touchstart="openNewTab('https://github.com/zulfidly/Currency-Converter')"
-            @click="openNewTab('https://github.com/zulfidly/Currency-Converter')"
-        > -->
-        <!-- <span class="absolute w-full h-full top-0 left-0"
-            @touchstart="openNewTab('https://github.com')"
-            @click="openNewTab('https://github.com')"
-        >
-    </span> -->
     </button>
 </template>
 
 <script setup>
     import { headerStyleIs } from '../GlobalVars.vue';
-    // let openNewTab = (url) => { window.open(url, "_blank", "noreferrer") }
 </script>
