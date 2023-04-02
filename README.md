@@ -49,6 +49,7 @@
 ```
 
 ### formatting currency symbols & number achieved as following :
+- credits to [Web Dev Simplified @ YouTube](https://www.youtube.com/watch?v=4oGWpTAY_hc)
 ```
     const currencyFormatter = (symbol, amount) => {
         if(Number(amount)) {
@@ -59,8 +60,7 @@
         }
     }
 ```
-
-### reformatting date received from API : YYYY-MM-DD to DD MMM YYYY
+- reformatting date received from API : YYYY-MM-DD to DD MMM YYYY
 ```    
 const dateFormatter = (d) => {
         let formatter = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long'})
@@ -68,7 +68,7 @@ const dateFormatter = (d) => {
     }
 ```
 
-### Axios library used to fetch API
+### [Axios](https://www.npmjs.com/package/axios) library used to fetch API
 - elements created with its SVG contents precisely scaled
 - coded in Vanilla JavaScript 
 - factoring API call into single function
