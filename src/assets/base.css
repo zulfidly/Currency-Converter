@@ -23,7 +23,14 @@
   --convert-btn-light: #ffc881;
   --convert-btn-dark: #792e02;
   --swap-btn: #5d51ff;
+  --viewTTM: #0086CC;
   --swap-duration: 0.3s; 
+
+  --chart-text-color-dark: #d4cfcf;
+  --chart-text-color-light: #0f0d0d;
+  --chart-bg-color-dark: #212020;
+  --chart-bg-color-light: #f2f2f2;
+
 }
 
 
@@ -42,6 +49,9 @@
   --color-bg-convert-btn: var(--convert-btn-light);
 
   --section-gap: 160px;
+
+  --chart-bg: var(--chart-bg-color-light);
+  --chart-text: var(--chart-text-color-light);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -57,6 +67,8 @@
     --color-text: var(--vt-c-text-dark-2);
 
     --color-bg-convert-btn: var(--convert-btn-dark);
+    --chart-bg: var(--chart-bg-color-dark);
+    --chart-text: var(--chart-text-color-dark);
 
   }
 }
@@ -81,7 +93,7 @@ input[type=number] {
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100svh;
   color: var(--color-text);
   background: var(--color-background);
   transition: color 0.5s, background-color 0.5s;

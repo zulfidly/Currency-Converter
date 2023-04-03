@@ -1,6 +1,8 @@
 <script>
     import { reactive } from 'vue';
+    import { createApp } from 'vue'
     import axios from 'axios';
+    import ChartingTTM from './ChartingTTM.vue';
 
     export const mainObj = reactive({
         allSymbols: undefined,
@@ -18,8 +20,10 @@
             rate: "",
             result: "",
         },
+        chartingData: undefined,
         isFetching: false,
         isSwapping: false,
+        isChartDisplaying: false,
     })
 
 //////// functions responding to fetchAPI()
@@ -56,6 +60,11 @@
             mainObj.fetched.result = currencyFormatter(mainObj.userSettings.convertTo, x.result)
             // console.log(mainObj);
         },
+        getChartingData: function(x) {
+            let y = new Map(Object.entries(x.rates))
+            // console.log(y);
+            structureChartData(y)
+        }
     }
 
 ////////header stylings
@@ -76,11 +85,19 @@
         convertBtnActive:    [" z-0 text-[var(--color-text)] bg-[var(--color-bg-convert-btn)]"],
         convertBtnNotActive: ["z-0 text-[var(--color-background)] bg-[var(--color-background-mute)]"],
     }
-//////// dashboard stylings
+//////// swap button stylings
     export const swapIconStyle = {
-            init : ["absolute left-2 mr-4 transition-all ease-out duration-700 fill-[var(--color-background-mute)]"],
+            init : ["transition-all ease-out duration-700 fill-[var(--color-background-mute)]"],
             swapOn: ["fill-[var(--swap-btn)]"],
         }
+
+//////// z-indexes
+    export const viewTTMstyle = {
+        initPoly: ["transition-all ease-out duration-700 fill-[var(--color-background-mute)]"],
+        chartPoly: ["fill-[var(--viewTTM)]"],
+        initPath: ["transition-all ease-out duration-700 fill-[var(--color-background-mute)]"],
+        chartPath: ["fill-[var(--color-text)]"],
+    }
 
 //////// z-indexes
     export const tide = {
@@ -125,7 +142,7 @@
         outest: ["lg:col-span-2"],
         // outestHide: ["opacity-0"],
         ctnr: ["grid lg:block grid-cols-1 gap-y-4 mt-5 lg:col-span-2"],
-        convertBtnDiv: ["flex justify-center"],
+        convertBtnDiv: ["flex justify-evenly"],
         baseNameTag: ["bg-[var(--color-background-mute)] rounded-l-md text-xl h-[50px] px-3 flex items-center border-dotted border-r-[0.5px] border-[var(--color-text)]"],
         basecurr: ["text-xl text-center tracking-wider"],
         baseCountry: ["text-md text-center tracking-wider"],
@@ -163,7 +180,7 @@
         }
     }
     const dateFormatter = (d) => {
-        let formatter = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long'})
+        let formatter = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long'}) //long = DD MMM YYYY
         return formatter.format(new Date(d))
     }
     export const swapCurrencies = () => {
@@ -201,4 +218,46 @@
         }, delay)
     }
     
+    export const getStartEndDates = () => {
+        const minute = 1000 * 60;
+        const hour = minute * 60;
+        const day = hour * 24;
+        const year = day * 365;
+        const now = Date.now()
+
+        const end_d = new Date(now - day).getDate()
+        const end_m = new Date(now - day).getMonth() + 1            // Jan is 0, Dec is 11
+        const end_y = new Date(now - day).getFullYear()
+        const end_date = end_y.toString().padStart(2, "0") + "-" + end_m.toString().padStart(2, "0") + "-" + end_d.toString().padStart(2, "0")
+
+        const start_d = new Date(now - year - day*2).getDate()          // 1 to 31
+        const start_m = new Date(now - year - day*2).getMonth() + 1     // API max time frame is 366 days, Jan is 0
+        const start_y = new Date(now - year - day*2).getFullYear()      // in YYYY
+        const start_date = start_y.toString().padStart(2, "0") + "-" + start_m.toString().padStart(2, "0") + "-" + start_d.toString().padStart(2, "0") 
+        // console.log(start_date, "to", end_date);
+        return { startDate: start_date, endDate: end_date }
+    }
+    
+    // export const gChart = createApp(ChartingTTM)
+    export const googleChart = () => {        
+        const gChart = createApp(ChartingTTM) 
+        gChart.mount("#curve_chart")
+        gChart.unmount()
+    }
+    const structureChartData = (map) => {
+        mainObj.chartingData = [["Date", "Rates"]]
+        let arr = []
+        let temp = []
+        map.forEach((rate, date) => {
+            let d = new Intl.DateTimeFormat('en-GB', { dateStyle: 'short'}).format(new Date(date))
+            let r = Object.values(rate)
+            r = r[0].toFixed(4)
+            temp = [d, Number(r)]
+            mainObj.chartingData.push(temp)
+        })    
+        arr = []; temp = [];  
+        // console.log(mainObj.chartingData);    
+        googleChart()
+
+    }
 </script>

@@ -2,11 +2,12 @@
     import { ref, computed, watch } from 'vue';
     import { mainObj } from './GlobalVars.vue';
     import { fetchAPI } from './GlobalVars.vue';
+    import { getStartEndDates } from './GlobalVars.vue';
     import { swapCurrencies } from './GlobalVars.vue';
     import { buttonStyleIs, inputStyle, dashboardStyle, swapIconStyle } from './GlobalVars.vue';
     import ResultDashboard from './ResultDashboard.vue';
-    import github from './icons/github.vue';
     import IconSwap from './icons/IconSwap.vue';
+    import IconViewTTM from "./icons/IconViewTTM.vue"
 
     const amtInput = ref("")
 
@@ -38,13 +39,25 @@
     )
 
     const getConversion = () => {
-        let base = mainObj.userSettings.convertFrom.toLowerCase()
-        let res = mainObj.userSettings.convertTo.toLowerCase()
+        let base = mainObj.userSettings.convertFrom
+        let res = mainObj.userSettings.convertTo
         let amt = mainObj.userSettings.amount
         let str = "https://api.exchangerate.host/convert/?" + `from=${base}` + `&to=${res}` + `&amount=${amt}`
         fetchAPI(`convertEndpoint`, str)
     }
-    function userInputChecker(e) {
+    // https://api.exchangerate.host/timeseries?base=USD&symbols=MYR&start_date=2023-03-01&end_date=2023-04-08
+    const viewTTM = () => {
+        mainObj.isChartDisplaying = true
+        let base = mainObj.userSettings.convertFrom
+        let res = mainObj.userSettings.convertTo
+        let amt = mainObj.userSettings.amount || "1"
+        let x = getStartEndDates()
+        console.log(x);
+        let str = "https://api.exchangerate.host/timeseries/?" + `base=${base}` + `&symbols=${res}` + `&amount=${amt}` + `&start_date=${x.startDate}` + `&end_date=${x.endDate}`
+        fetchAPI("getChartingData", str)
+    }
+
+    function userInputChecker() {
         let regex = new RegExp("[0-9]", 'g')
         const chkInput = regex.test(amtInput.value.toString())
 
@@ -82,6 +95,9 @@
                 </button>
                 <button :disabled="!isConvertible" @click="getConversion" :class="[buttonStyleIs.convertBtn, isConvertible?buttonStyleIs.convertBtnActive:buttonStyleIs.convertBtnNotActive]">
                     Convert
+                </button>
+                <button :disabled="!isSwappable" @click="viewTTM" >
+                    <IconViewTTM />
                 </button>
             </template>
 

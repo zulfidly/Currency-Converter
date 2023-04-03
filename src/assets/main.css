@@ -24,12 +24,12 @@
     /* place-items: center; */
     justify-items: center;
     align-items: flex-start;
-    margin-top: 50px;
+    /* margin-top: 10px; */
   }
 
   #app {
     display: grid;
-    grid-template-columns: 400px 400px;
-    padding: 0 0rem;
+    grid-template-columns: 450px 450px;
+    /* padding: 0rem; */
   }
 }

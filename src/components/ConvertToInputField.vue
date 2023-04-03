@@ -22,6 +22,7 @@
         () => mainObj.userSettings.convertTo,
         () => {
             // console.log('updating dynList');
+            mainObj.chartingData = undefined
             mainObj.fetched.result = undefined
             let symF = mainObj.userSettings.convertFrom
             let symT = mainObj.userSettings.convertTo
