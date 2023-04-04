@@ -4,6 +4,7 @@
     import { fetchAPI } from "./components/GlobalVars.vue"
     import { mainObj, tide } from "./components/GlobalVars.vue";
     import HeaderTop from "./components/HeaderTop.vue";
+    import IconClose from "./components/icons/IconClose.vue";
     
     const router = useRouter()
     router.push("/")
@@ -18,7 +19,9 @@ const unmountChart = () => {
 </script>
 
 <template>
-    <button @mousedown="unmountChart" class="fixed top-4 left-4 z-40 text-[var(--color-text)]" v-show="mainObj.isChartDisplaying">Close</button>
+    <button @mousedown="unmountChart" class="fixed top-4 left-4 z-40 text-[var(--color-text)]" v-show="mainObj.isChartDisplaying">
+        <IconClose />
+    </button>
     <div id="curve_chart" v-show="mainObj.isChartDisplaying"> </div>
 
     <HeaderTop />

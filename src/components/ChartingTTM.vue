@@ -1,7 +1,5 @@
 <script setup>
-import { computed } from '@vue/reactivity';
 import { mainObj } from './GlobalVars.vue';
-import { tide } from "./GlobalVars.vue"
 
 // import { onMounted, onUnmounted } from 'vue';
 // onMounted(() => { console.log('chart mounted');})
@@ -15,10 +13,15 @@ function drawChart() {
 
     var r = document.querySelector(':root')
     var rs = getComputedStyle(r)
-    let bgClr = rs.getPropertyValue("--chart-bg").trim()
     let txtClr = rs.getPropertyValue("--chart-text").trim()
-    // console.log(bgClr, txtClr);
-
+    let color = {
+      mainTitle: txtClr,
+      legendTextColor: txtClr,
+      xAxisLabels: txtClr,
+      yAxisLabels: txtClr,
+      chartAreaBG: rs.getPropertyValue("--chartarea-bg").trim(),
+      chartBG: rs.getPropertyValue("--chart-bg").trim(),
+    }
 
     let temp = [...mainObj.chartingData]
     const startDate = temp[1][0]
@@ -26,38 +29,58 @@ function drawChart() {
 
     var data = google.visualization.arrayToDataTable(mainObj.chartingData);
     let amt = mainObj.userSettings.amount || "1.00"
+    
     var options = {
-        title: `${mainObj.userSettings.convertTo} per ${mainObj.userSettings.convertFrom} ${amt} [${startDate} to ${endDate}]`,
-        width: screen.width,
-        height: screen.height,
-        titleTextStyle: {
-            color: txtClr,
-        },
-        curveType: 'none',
-        //   curveType: 'function', //to get curves instead of pointy graph
-        legend: { position: 'bottom' },
-        backgroundColor: bgClr,
-        hAxis: {
-            slantedText: true,
+          title: `${mainObj.userSettings.convertTo} per ${mainObj.userSettings.convertFrom} ${amt} [${startDate} to ${endDate}]`,
+          titlePosition: "out",
+          titleTextStyle: {
+              // fontName: "Trebuchet MS",
+              fontSize: 16,
+              bold: true,
+              color: color.mainTitle,
+          },
+          width: screen.width,
+          height: screen.height,
+          
+          backgroundColor: color.chartBG,
+          chartArea: {
+            top: 50,
+            width: "75%",
+            // width: "auto",
+            // height: "50%",
+            backgroundColor: color.chartAreaBG
+          },
+          vAxis: {
+            textPosition: "out",
+            textStyle: {
+              fontSize: 14,
+              bold: true,
+              color: color.yAxisLabels,
+            },
+          },
+
+          hAxis: { 
+            textPosition: "out",
+            slantedText: true, 
             slantedTextAngle: 45,
             showTextEvery: 28,
             viewWindowMode: "pretty",
             textStyle: {
-                fontSize: 10,
-                color: txtClr,
+                fontSize: 14,
+                color: color.xAxisLabels,
             },
-        },
-        annotations: {
-            textStyle: {
-                color: txtClr,
-            },
-        },
-        legend: {
+          },
+          legend: {
             position: "top",
             alignment: "end",
-            textStyle: { color: txtClr },
+            textStyle: {
+                color: color.legendTextColor,
+                bold: true,
+            },
         },
+
     };
+    
     var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
     chart.draw(data, options);
 }

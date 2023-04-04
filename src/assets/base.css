@@ -26,10 +26,13 @@
   --viewTTM: #0086CC;
   --swap-duration: 0.3s; 
 
-  --chart-text-color-dark: #d4cfcf;
-  --chart-text-color-light: #0f0d0d;
-  --chart-bg-color-dark: #212020;
-  --chart-bg-color-light: #f2f2f2;
+  --chart-text-color-dark: #b3b3b3;
+  --chart-text-color-light: #2c3e50;
+  --chart-bg-color-dark: #222222;
+  --chart-bg-color-light: #f8f8f8;
+  --chartarea-bg-color-dark: #282828;
+  --chartarea-bg-color-light: #f2f2f2;
+
 
 }
 
@@ -51,6 +54,7 @@
   --section-gap: 160px;
 
   --chart-bg: var(--chart-bg-color-light);
+  --chartarea-bg: var(--chartarea-bg-color-light);
   --chart-text: var(--chart-text-color-light);
 }
 
@@ -68,6 +72,7 @@
 
     --color-bg-convert-btn: var(--convert-btn-dark);
     --chart-bg: var(--chart-bg-color-dark);
+    --chartarea-bg: var(--chartarea-bg-color-dark);
     --chart-text: var(--chart-text-color-dark);
 
   }

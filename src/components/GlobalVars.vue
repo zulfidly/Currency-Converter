@@ -195,7 +195,7 @@
 
         var r = document.querySelector(':root')
         var rs = getComputedStyle(r)
-        let delay = rs.getPropertyValue("--swap-duration")
+        let delay = rs.getPropertyValue("--swap-duration").trim()
         if(delay.includes("ms")) {
             delay = Number(delay.replace(new RegExp("[ms]", "ig"), ""))
         } else if(delay.includes("s")){
@@ -230,9 +230,9 @@
         const end_y = new Date(now - day).getFullYear()
         const end_date = end_y.toString().padStart(2, "0") + "-" + end_m.toString().padStart(2, "0") + "-" + end_d.toString().padStart(2, "0")
 
-        const start_d = new Date(now - year - day*2).getDate()          // 1 to 31
-        const start_m = new Date(now - year - day*2).getMonth() + 1     // API max time frame is 366 days, Jan is 0
-        const start_y = new Date(now - year - day*2).getFullYear()      // in YYYY
+        const start_d = new Date(now - year - day).getDate()          // 1 to 31
+        const start_m = new Date(now - year - day).getMonth() + 1     // API max time frame is 366 days, Jan is 0
+        const start_y = new Date(now - year - day).getFullYear()      // in YYYY
         const start_date = start_y.toString().padStart(2, "0") + "-" + start_m.toString().padStart(2, "0") + "-" + start_d.toString().padStart(2, "0") 
         // console.log(start_date, "to", end_date);
         return { startDate: start_date, endDate: end_date }

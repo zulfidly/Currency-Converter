@@ -52,7 +52,7 @@
         let res = mainObj.userSettings.convertTo
         let amt = mainObj.userSettings.amount || "1"
         let x = getStartEndDates()
-        console.log(x);
+        // console.log(x);
         let str = "https://api.exchangerate.host/timeseries/?" + `base=${base}` + `&symbols=${res}` + `&amount=${amt}` + `&start_date=${x.startDate}` + `&end_date=${x.endDate}`
         fetchAPI("getChartingData", str)
     }
