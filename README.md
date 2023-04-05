@@ -93,3 +93,10 @@ const dateFormatter = (d) => {
       fetchAPI("constructMainObj", "https://api.exchangerate.host/symbols/")
 
 ```
+### Integration with [Google Charts](https://developers.google.com/chart)
+- API's time-series 366days utilised to generate a Trailing Twelve Month (TTM) chart
+```
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+```
