@@ -12,18 +12,18 @@
   }
 
   watch(
-      () => mainObj.chartingData,
-      () => {
-        google.charts.setOnLoadCallback(drawChart);
-      }
+    () => mainObj.chartingData,
+    () => { google.charts.setOnLoadCallback(drawChart) }
   )
-
+  
+  window.matchMedia("(prefers-color-scheme:dark)").addEventListener("change", () => {
+    // console.log('color changed');
+    if(mainObj.isChartDisplaying) google.charts.setOnLoadCallback(drawChart)
+  })
 
   screen.orientation.addEventListener("change", () => { //screen.orientataion is a read-only
     // console.log('screen rotated');
-    if(mainObj.isChartDisplaying) {
-      google.charts.setOnLoadCallback(drawChart);
-    } else return
+    if(mainObj.isChartDisplaying) google.charts.setOnLoadCallback(drawChart);
   });
 
 
