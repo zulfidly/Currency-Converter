@@ -2,6 +2,7 @@
   import { watch } from 'vue';
   import { mainObj } from './GlobalVars.vue';
   import IconClose from './icons/IconClose.vue';
+  google.charts.load('current', { 'packages': ['corechart'] });
 
   let safeDimension = {
     W: undefined,
@@ -13,16 +14,14 @@
   watch(
       () => mainObj.chartingData,
       () => {
-        google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
       }
   )
 
 
   screen.orientation.addEventListener("change", () => { //screen.orientataion is a read-only
-    console.log('screen rotated');
+    // console.log('screen rotated');
     if(mainObj.isChartDisplaying) {
-      google.charts.load('current', { 'packages': ['corechart'] });
       google.charts.setOnLoadCallback(drawChart);
     } else return
   });
@@ -31,15 +30,15 @@
   function setChartDimension() { 
     // console.log('setChartDimension');
     let q = screen.orientation.type
-    console.log(q);
+    // console.log(q);
     if(q == "portrait-primary" || q == "portrait-secondary") {
       safeDimension.W = screen.width * 0.75
       safeDimension.H = window.innerHeight * 0.7
-      safeDimension.T = 80 // in px
+      safeDimension.T = 120 // in px
       safeDimension.L = 80
     } else if(q == "landscape-primary" || q == "landscape-secondary") {
       safeDimension.W = window.innerWidth * 0.75
-      safeDimension.H = window.innerHeight * 0.65
+      safeDimension.H = window.innerHeight * 0.6
       safeDimension.T = 70
       safeDimension.L = 140
     }

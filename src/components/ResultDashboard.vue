@@ -1,5 +1,6 @@
 <script setup>
-    import { dashboardStyle } from './GlobalVars.vue';
+    import { dashboardStyle, fetchErrorStyle } from './GlobalVars.vue';
+    import { mainObj } from './GlobalVars.vue';
 </script>
 
 <template>
@@ -21,7 +22,7 @@
             </div>
             <p class="text-3xl px-2">=</p>
             <div>
-                <p :class="[dashboardStyle.outcurr]">
+                <p :class="[dashboardStyle.outcurr, mainObj.isFetchError ? fetchErrorStyle.ping:'']">
                     <slot name="outputCurrency"></slot>
                 </p>
                 

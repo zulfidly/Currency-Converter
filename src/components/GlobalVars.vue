@@ -22,23 +22,27 @@
         isFetching: false,
         isSwapping: false,
         isChartDisplaying: false,
+        isFetchError: false,
     })
 
 //////// functions responding to fetchAPI()
+    export const fetchErrorStyle = { ping: ["animate-ping"] }
     export function fetchAPI(fu, endpoint) {
+        mainObj.isFetchError = false
         mainObj.isFetching = true
         axios
-            .get(endpoint)
+            .get(endpoint, {timeout: 3000})
             .then((response) => {
                 funcLib[fu](response.data)
                 mainObj.isFetching = false
              }) 
              .catch((error) => {
                  console.log(error) 
-                 mainObj.fetched.result = "-try again-"
+                 reInitStates()
+                 mainObj.isFetchError = true
+                 mainObj.fetched.result = "*timeout*"
                 })
     }
-            // .then((response) =>  eval(`${fu}(response.data)`) )
     const funcLib = {
         constructMainObj : function(x) {
             let y = new Map(Object.entries(x.symbols))
@@ -65,6 +69,12 @@
         }
     }
 
+//////// re-init states
+    function reInitStates() {
+        mainObj.isFetching = false
+        mainObj.isSwapping = false
+        mainObj.isChartDisplaying = false
+    }
 ////////header stylings
     export const headerStyleIs = {
         header: ["w-full h-auto bg-[var(--color-background-soft)] flex justify-evenly lg:justify-between items-center rounded-md lg:col-span-2"],
