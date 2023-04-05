@@ -1,8 +1,6 @@
 <script>
     import { reactive } from 'vue';
-    import { createApp } from 'vue'
     import axios from 'axios';
-    import ChartingTTM from './ChartingTTM.vue';
 
     export const mainObj = reactive({
         allSymbols: undefined,
@@ -238,15 +236,8 @@
         return { startDate: start_date, endDate: end_date }
     }
     
-    // export const gChart = createApp(ChartingTTM)
-    export const googleChart = () => {        
-        const gChart = createApp(ChartingTTM) 
-        gChart.mount("#curve_chart")
-        gChart.unmount()
-    }
     const structureChartData = (map) => {
         mainObj.chartingData = [["Date", "Rates"]]
-        let arr = []
         let temp = []
         map.forEach((rate, date) => {
             let d = new Intl.DateTimeFormat('en-GB', { dateStyle: 'short'}).format(new Date(date))
@@ -255,9 +246,6 @@
             temp = [d, Number(r)]
             mainObj.chartingData.push(temp)
         })    
-        arr = []; temp = [];  
-        // console.log(mainObj.chartingData);    
-        googleChart()
-
+        mainObj.isChartDisplaying =  true
     }
 </script>

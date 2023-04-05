@@ -1,45 +1,54 @@
 <script setup>
-import { mainObj } from './GlobalVars.vue';
+  import { watch } from 'vue';
+  import { mainObj } from './GlobalVars.vue';
+  import IconClose from './icons/IconClose.vue';
 
-// import { onMounted, onUnmounted } from 'vue';
-// onMounted(() => { console.log('chart mounted');})
-// onUnmounted(() => {console.log('chart UN-mounted');})
-
-screen.orientation.addEventListener("change", () => { //screen.orientataion is a read-only
-  if(mainObj.isChartDisplaying) {
-    setChartDimension()
-    drawChart()
-  } else return
-});
-let safeDimension = {
-  W: undefined,
-  H: undefined,
-  L: undefined,
-  T: undefined,
-}
-const setChartDimension = () => { 
-  console.log('setChartDimension');
-  let q = screen.orientation.type
-  if(q == "portrait-primary" || q == "portrait-secondary") {
-    safeDimension.W = screen.width * 0.75
-    safeDimension.H = window.innerHeight * 0.7
-    safeDimension.T = 80
-    safeDimension.L = 80
-} else if(q == "landscape-primary" || q == "landscape-secondary") {
-    safeDimension.W = window.innerWidth * 0.75
-    safeDimension.H = window.innerHeight * 0.65
-    safeDimension.T = 70
-    safeDimension.L = 140
+  let safeDimension = {
+    W: undefined,
+    H: undefined,
+    L: undefined,
+    T: undefined,
   }
-}
-setChartDimension()
 
-google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.setOnLoadCallback(drawChart);
+  watch(
+      () => mainObj.chartingData,
+      () => {
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+      }
+  )
 
-function drawChart() {
-    // console.log('drawing chart');
 
+  screen.orientation.addEventListener("change", () => { //screen.orientataion is a read-only
+    console.log('screen rotated');
+    if(mainObj.isChartDisplaying) {
+      google.charts.load('current', { 'packages': ['corechart'] });
+      google.charts.setOnLoadCallback(drawChart);
+    } else return
+  });
+
+
+  function setChartDimension() { 
+    // console.log('setChartDimension');
+    let q = screen.orientation.type
+    console.log(q);
+    if(q == "portrait-primary" || q == "portrait-secondary") {
+      safeDimension.W = screen.width * 0.75
+      safeDimension.H = window.innerHeight * 0.7
+      safeDimension.T = 80 // in px
+      safeDimension.L = 80
+    } else if(q == "landscape-primary" || q == "landscape-secondary") {
+      safeDimension.W = window.innerWidth * 0.75
+      safeDimension.H = window.innerHeight * 0.65
+      safeDimension.T = 70
+      safeDimension.L = 140
+    }
+  }
+
+  function drawChart() {
+    if(!mainObj.isChartDisplaying) return
+    setChartDimension()
+    console.log('generating chart');
     var r = document.querySelector(':root')
     var rs = getComputedStyle(r)
     let txtClr = rs.getPropertyValue("--chart-text").trim()
@@ -51,15 +60,13 @@ function drawChart() {
       chartAreaBG: rs.getPropertyValue("--chartarea-bg").trim(),
       chartBG: rs.getPropertyValue("--chart-bg").trim(),
     }
+
     let temp = [...mainObj.chartingData]
     const startDate = temp[1][0]
     const endDate = temp[temp.length-1][0]
-
     var data = google.visualization.arrayToDataTable(mainObj.chartingData);
     let amt = mainObj.userSettings.amount || "1.00"
     
-    console.log(window.innerWidth, screen.width);
-
     var options = {
           title: `${mainObj.userSettings.convertTo} per ${mainObj.userSettings.convertFrom} ${amt} [${startDate} to ${endDate}]`,
           titlePosition: "out",
@@ -113,11 +120,31 @@ function drawChart() {
     
     var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
     chart.draw(data, options);
-}
+  }
 
-
+  const removeChart = () => {
+    mainObj.isChartDisplaying = false
+    document.getElementById("curve_chart").innerHTML = ""
+  }
 </script>
+
 <template>
+    <button @mousedown="removeChart" class="fixed top-4 left-4 z-40 text-[var(--color-text)]" v-show="mainObj.isChartDisplaying">
+        <IconClose />
+    </button>
+    <div id="curve_chart" v-show="mainObj.isChartDisplaying"></div>
 
 </template>
 
+<style scoped>
+    #curve_chart {
+        width: 100vw;
+        height: 100svh;
+        padding: 0px;
+        position: fixed;
+        transform: translateX(-50%);
+        top: 0px;
+        left: 50%;
+        z-index: 20;
+    }
+</style>

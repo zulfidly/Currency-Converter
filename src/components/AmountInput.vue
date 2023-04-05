@@ -47,7 +47,6 @@
     }
     // https://api.exchangerate.host/timeseries?base=USD&symbols=MYR&start_date=2023-03-01&end_date=2023-04-08
     const viewTTM = () => {
-        mainObj.isChartDisplaying = true
         let base = mainObj.userSettings.convertFrom
         let res = mainObj.userSettings.convertTo
         let amt = mainObj.userSettings.amount || "1"
