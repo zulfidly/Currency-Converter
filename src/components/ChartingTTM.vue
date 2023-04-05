@@ -5,6 +5,35 @@ import { mainObj } from './GlobalVars.vue';
 // onMounted(() => { console.log('chart mounted');})
 // onUnmounted(() => {console.log('chart UN-mounted');})
 
+screen.orientation.addEventListener("change", () => { //screen.orientataion is a read-only
+  if(mainObj.isChartDisplaying) {
+    setChartDimension()
+    drawChart()
+  } else return
+});
+let safeDimension = {
+  W: undefined,
+  H: undefined,
+  L: undefined,
+  T: undefined,
+}
+const setChartDimension = () => { 
+  console.log('setChartDimension');
+  let q = screen.orientation.type
+  if(q == "portrait-primary" || q == "portrait-secondary") {
+    safeDimension.W = screen.width * 0.75
+    safeDimension.H = window.innerHeight * 0.7
+    safeDimension.T = 80
+    safeDimension.L = 80
+} else if(q == "landscape-primary" || q == "landscape-secondary") {
+    safeDimension.W = window.innerWidth * 0.75
+    safeDimension.H = window.innerHeight * 0.65
+    safeDimension.T = 70
+    safeDimension.L = 140
+  }
+}
+setChartDimension()
+
 google.charts.load('current', { 'packages': ['corechart'] });
 google.charts.setOnLoadCallback(drawChart);
 
@@ -22,7 +51,6 @@ function drawChart() {
       chartAreaBG: rs.getPropertyValue("--chartarea-bg").trim(),
       chartBG: rs.getPropertyValue("--chart-bg").trim(),
     }
-
     let temp = [...mainObj.chartingData]
     const startDate = temp[1][0]
     const endDate = temp[temp.length-1][0]
@@ -30,6 +58,8 @@ function drawChart() {
     var data = google.visualization.arrayToDataTable(mainObj.chartingData);
     let amt = mainObj.userSettings.amount || "1.00"
     
+    console.log(window.innerWidth, screen.width);
+
     var options = {
           title: `${mainObj.userSettings.convertTo} per ${mainObj.userSettings.convertFrom} ${amt} [${startDate} to ${endDate}]`,
           titlePosition: "out",
@@ -40,14 +70,14 @@ function drawChart() {
               color: color.mainTitle,
           },
           width: screen.width,
-          height: screen.height,
-          
+          height: screen.height,         
           backgroundColor: color.chartBG,
+
           chartArea: {
-            top: 50,
-            width: "75%",
-            // width: "auto",
-            // height: "50%",
+            top: safeDimension.T,
+            left: safeDimension.L,
+            width: safeDimension.W,
+            height: safeDimension.H,
             backgroundColor: color.chartAreaBG
           },
           vAxis: {
@@ -84,11 +114,7 @@ function drawChart() {
     var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
     chart.draw(data, options);
 }
-screen.orientation.addEventListener("change", () => {
-    if(mainObj.isChartDisplaying) {
-        drawChart()
-    } else return
-});
+
 
 </script>
 <template>

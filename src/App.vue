@@ -16,13 +16,16 @@ const unmountChart = () => {
     mainObj.isChartDisplaying = false
     document.getElementById("curve_chart").innerHTML = ""
 }
+
 </script>
 
 <template>
     <button @mousedown="unmountChart" class="fixed top-4 left-4 z-40 text-[var(--color-text)]" v-show="mainObj.isChartDisplaying">
         <IconClose />
     </button>
-    <div id="curve_chart" v-show="mainObj.isChartDisplaying"> </div>
+    <div id="curve_chart" v-show="mainObj.isChartDisplaying"> 
+    
+    </div>
 
     <HeaderTop />
     <RouterView />
@@ -31,7 +34,7 @@ const unmountChart = () => {
 <style scoped>
     #curve_chart {
         width: 100vw;
-        height: 100vh;
+        height: 100svh;
         padding: 0px;
         position: fixed;
         transform: translateX(-50%);
