@@ -87,7 +87,7 @@
 ////////button stylings
     export const buttonStyleIs = {
         // symbolSearchInput: ["bg-[var(--color-background-mute)] text-lg w-full h-[50px] pl-14 rounded-md tracking-wider"],
-        dynDropList: ["w-full h-14 px-2 flex justify-start items-center gap-x-3 rounded-lg lg:hover:bg-[var(--color-background-soft)] lg:hover:scale-[0.99] ease-out duration-200"],
+        dynDropList: ["w-full h-14 px-2 flex justify-start items-center gap-x-3 rounded-lg lg:hover:bg-[var(--color-background-mute)] lg:hover:scale-[0.98] transition-all ease-out duration-200"],
         clear: ["absolute right-[10px] py-1 px-4 border border-2 border-[var(--color-border)] rounded-lg active:scale-90 ease-out duration-150"],
         convertBtn: [`px-6 py-2 w-auto h-auto rounded-full text-2xl font-normal  flex items-center tracking-widest transition-all ease-out duration-700`],
         convertBtnActive:    [" z-0 text-[var(--color-text)] bg-[var(--color-bg-convert-btn)]"],

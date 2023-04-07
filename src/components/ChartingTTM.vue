@@ -4,11 +4,17 @@
   import IconClose from './icons/IconClose.vue';
   google.charts.load('current', { 'packages': ['corechart'] });
 
-  let safeDimension = {
-    W: undefined,
-    H: undefined,
-    L: undefined,
-    T: undefined,
+  let dimension = {
+    innerChart: {
+      W: undefined,
+      H: undefined,
+      L: undefined,
+      T: undefined,
+    },
+    outerChart: {
+      W: undefined,
+      H: undefined,
+    }
   }
 
   watch(
@@ -17,37 +23,45 @@
   )
   
   window.matchMedia("(prefers-color-scheme:dark)").addEventListener("change", () => {
-    // console.log('color changed');
     if(mainObj.isChartDisplaying) google.charts.setOnLoadCallback(drawChart)
   })
 
-  screen.orientation.addEventListener("change", () => { //screen.orientataion is a read-only
-    // console.log('screen rotated');
-    if(mainObj.isChartDisplaying) google.charts.setOnLoadCallback(drawChart);
-  });
-
+  matchMedia("(orientation:portrait)").addEventListener("change", () => {
+    if(mainObj.isChartDisplaying) google.charts.setOnLoadCallback(drawChart)    
+  })
 
   function setChartDimension() { 
-    // console.log('setChartDimension');
-    let q = screen.orientation.type
-    // console.log(q);
-    if(q == "portrait-primary" || q == "portrait-secondary") {
-      safeDimension.W = screen.width * 0.75
-      safeDimension.H = window.innerHeight * 0.7
-      safeDimension.T = 120 // in px
-      safeDimension.L = 80
-    } else if(q == "landscape-primary" || q == "landscape-secondary") {
-      safeDimension.W = window.innerWidth * 0.75
-      safeDimension.H = window.innerHeight * 0.6
-      safeDimension.T = 70
-      safeDimension.L = 140
+    let isPortrait = matchMedia("(orientation:portrait)").matches
+    let isMobile = matchMedia("(max-width:1024px)").matches
+    // console.log(isMobile);
+    if(isMobile && isPortrait) {
+      dimension.innerChart.W = screen.width * 0.75
+      dimension.innerChart.H = window.innerHeight * 0.7
+      dimension.innerChart.T = 120 // in px
+      dimension.innerChart.L = 80
+      dimension.outerChart.W = screen.width
+      dimension.outerChart.H = screen.height
+    } else if(isMobile && !isPortrait) {
+      dimension.innerChart.W = window.innerWidth * 0.75
+      dimension.innerChart.H = window.innerHeight * 0.6
+      dimension.innerChart.T = 70
+      dimension.innerChart.L = 140
+      dimension.outerChart.W = screen.width
+      dimension.outerChart.H = screen.height
+    } else {
+      dimension.innerChart.W = window.innerWidth * 0.75
+      dimension.innerChart.H = window.innerHeight * 0.75
+      dimension.innerChart.T = "auto"
+      dimension.innerChart.L = "auto"
+      dimension.outerChart.W = screen.width * 0.9
+      dimension.outerChart.H = screen.height * 0.8
     }
   }
 
   function drawChart() {
     if(!mainObj.isChartDisplaying) return
     setChartDimension()
-    console.log('generating chart');
+    // console.log('drawChart');
     var r = document.querySelector(':root')
     var rs = getComputedStyle(r)
     let txtClr = rs.getPropertyValue("--chart-text").trim()
@@ -70,20 +84,19 @@
           title: `${mainObj.userSettings.convertTo} per ${mainObj.userSettings.convertFrom} ${amt} [${startDate} to ${endDate}]`,
           titlePosition: "out",
           titleTextStyle: {
-              // fontName: "Trebuchet MS",
               fontSize: 16,
               bold: true,
               color: color.mainTitle,
           },
-          width: screen.width,
-          height: screen.height,         
+          width: dimension.outerChart.W,
+          height: dimension.outerChart.H,         
           backgroundColor: color.chartBG,
 
           chartArea: {
-            top: safeDimension.T,
-            left: safeDimension.L,
-            width: safeDimension.W,
-            height: safeDimension.H,
+            top: dimension.innerChart.T,
+            left: dimension.innerChart.L,
+            width: dimension.innerChart.W,
+            height: dimension.innerChart.H,
             backgroundColor: color.chartAreaBG
           },
           vAxis: {
@@ -128,22 +141,13 @@
 </script>
 
 <template>
-    <button @mousedown="removeChart" class="fixed top-4 left-4 z-40 text-[var(--color-text)]" v-show="mainObj.isChartDisplaying">
-        <IconClose />
-    </button>
-    <div id="curve_chart" v-show="mainObj.isChartDisplaying"></div>
+  <div class="fixed w-screen h-screen top-0 left-0 bg-[var(--color-background)] z-20" v-show="mainObj.isChartDisplaying">
+  </div>
+  
+  <div id="curve_chart" class="fixed z-20 top-0 left-0 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:top-1/2 lg:left-1/2" v-show="mainObj.isChartDisplaying"></div>
+
+  <button @mousedown="removeChart" class="fixed z-30 top-4 left-4 lg:left-auto lg:top-8 lg:right-8 text-[var(--color-text)]" v-show="mainObj.isChartDisplaying">
+      <IconClose />
+  </button>
 
 </template>
-
-<style scoped>
-    #curve_chart {
-        width: 100vw;
-        height: 100svh;
-        padding: 0px;
-        position: fixed;
-        transform: translateX(-50%);
-        top: 0px;
-        left: 50%;
-        z-index: 20;
-    }
-</style>

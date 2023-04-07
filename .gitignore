@@ -14,6 +14,7 @@ package.json
 package-lock.json
 postcss.config.js
 tailwind.config.js
+jsconfig.json
 vite.config.js
 main.js
 

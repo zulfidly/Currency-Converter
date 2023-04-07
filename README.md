@@ -70,8 +70,6 @@ const dateFormatter = (d) => {
 ```
 
 ### [Axios](https://www.npmjs.com/package/axios) library used to fetch API
-- elements created with its SVG contents precisely scaled
-- coded in Vanilla JavaScript 
 - factoring API call into single function
 ```
     export function fetchAPI(fu, endpoint) {

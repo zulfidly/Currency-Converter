@@ -109,7 +109,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  overflow-x: hidden;
 }
 @keyframes swap_from {
   0%   { transform:translateX(0)  ; }

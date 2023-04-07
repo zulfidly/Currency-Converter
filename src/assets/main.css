@@ -29,7 +29,7 @@
 
   #app {
     display: grid;
-    grid-template-columns: 450px 450px;
+    grid-template-columns: 500px 500px;
     /* padding: 0rem; */
   }
 }
