@@ -81,7 +81,7 @@
             <p :class="[dashboardStyle.baseNameTag]"> {{ mainObj.userSettings.convertFrom  }}</p>
             <input 
                 @input="userInputChecker"
-                v-model="amtInput"
+                v-model.number="amtInput"
                 :class="[inputStyle.amtinput]"
                 placeholder="Amount" type="number"
             />

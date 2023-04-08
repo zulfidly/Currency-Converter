@@ -179,7 +179,7 @@
         return `${x} 1.00 = ${y} ${r}`
 
     }
-    const currencyFormatter = (symbol, amount) => {
+    export const currencyFormatter = (symbol, amount) => {
         if(Number(amount)) {
             let formatter = new Intl.NumberFormat(undefined, {currency: symbol, style:"currency"})
             return formatter.format(amount)
@@ -249,8 +249,11 @@
     const structureChartData = (map) => {
         mainObj.chartingData = [["Date", "Rates"]]
         let temp = []
+        let regex = new RegExp("/", "g")
+        console.log();
         map.forEach((rate, date) => {
             let d = new Intl.DateTimeFormat('en-GB', { dateStyle: 'short'}).format(new Date(date))
+            d = d.replace(regex, "-")
             let r = Object.values(rate)
             r = r[0].toFixed(4)
             temp = [d, Number(r)]

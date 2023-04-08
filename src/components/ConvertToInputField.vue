@@ -84,7 +84,7 @@
             <div :class="[convFromCtnr.inner2]">
                 <IconList v-if="!isListConToDisplay" @mousedown="isListConToDisplay=!isListConToDisplay" />
                 <SearchIcon v-else @mousedown="isListConToDisplay=true"/>
-                <input id="inputToField" @focus="onFocusInput" v-model="userInputConTo" :class="[inputStyle.symbolSearchInput]" placeholder="Convert to" type="text"/>
+                <input id="inputToField" @focus="onFocusInput" v-model.trim="userInputConTo" :class="[inputStyle.symbolSearchInput]" placeholder="Convert to" type="text"/>
                 <Btn v-if="!isListConToDisplay" @mousedown="clearInput" :class="[buttonStyleIs.clear]">
                     <template #btn>Reset</template>
                 </Btn>

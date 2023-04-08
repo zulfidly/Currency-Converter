@@ -79,9 +79,8 @@
     const endDate = temp[temp.length-1][0]
     var data = google.visualization.arrayToDataTable(mainObj.chartingData);
     let amt = mainObj.userSettings.amount || "1.00"
-    
     var options = {
-          title: `${mainObj.userSettings.convertTo} per ${mainObj.userSettings.convertFrom} ${amt} [${startDate} to ${endDate}]`,
+          title: `${mainObj.userSettings.convertTo} per ${mainObj.userSettings.convertFrom} ${amt} \n ${startDate} to ${endDate}`,
           titlePosition: "out",
           titleTextStyle: {
               fontSize: 16,
