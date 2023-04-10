@@ -67,7 +67,7 @@
             mainObj.userSettings.amount = str.toString()
             mainObj.userSettings.cFromFormattedForDisplay = formatter.format(amtInput.value)
         } else {
-            mainObj.userSettings.cFromFormattedForDisplay = "-input required-"
+            mainObj.userSettings.cFromFormattedForDisplay = "-invalid input-"
             mainObj.userSettings.amount = 0
         }
         // console.log(mainObj.userSettings);
@@ -79,7 +79,7 @@
     <div :class="[dashboardStyle.outest]">
         <section class="flex">
             <p :class="[dashboardStyle.baseNameTag]"> {{ mainObj.userSettings.convertFrom  }}</p>
-            <input 
+            <input            
                 @input="userInputChecker"
                 v-model.number="amtInput"
                 :class="[inputStyle.amtinput]"

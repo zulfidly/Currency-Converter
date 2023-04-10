@@ -4,7 +4,7 @@
 ## Description
  - a [VueJS](https://vuejs.org/guide/introduction.html) app (with darkmode)
  - coded in Vue 3 (Composition API)
- - an attempt on a tutorial by [Sigma School](https://sigmaschool.co/)
+ - an attempt on a [tutorial](https://github.com/joinsigma/frontend/tree/master/module_4/capstone) by [Sigma School](https://sigmaschool.co/)
  - styled with [TailwindCSS](https://tailwindcss.com/) framework
  
  ### Gaining usage understanding of :
