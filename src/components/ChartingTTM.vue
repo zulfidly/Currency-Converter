@@ -26,7 +26,8 @@
     if(mainObj.isChartDisplaying) google.charts.setOnLoadCallback(drawChart)
   })
 
-  matchMedia("(orientation:portrait)").addEventListener("change", () => {
+  window.addEventListener("resize", () => {
+    // console.log('resize');
     if(mainObj.isChartDisplaying) google.charts.setOnLoadCallback(drawChart)    
   })
 
