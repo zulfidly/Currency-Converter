@@ -1,6 +1,7 @@
 <script setup>
     import { RouterView, useRouter } from "vue-router"
-    import { onBeforeMount } from 'vue';
+    // import { onBeforeMount } from 'vue';
+    import { onMounted } from 'vue';
     import { defineAsyncComponent } from "vue";
     import { fetchAPI } from "./components/GlobalVars.vue"
     import HeaderTop from "./components/HeaderTop.vue";
@@ -10,7 +11,7 @@
     )
     const router = useRouter()
     router.push("/")
-    onBeforeMount(() => { fetchAPI("constructMainObj", "https://api.exchangerate.host/symbols/") })
+    onMounted(() => { fetchAPI("constructMainObj", "https://api.exchangerate.host/symbols/") })
 
 </script>
 
