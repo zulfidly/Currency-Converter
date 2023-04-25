@@ -98,7 +98,7 @@
                 <li v-for="list in mainObj.dynList" :class="ulStyleIs.li">
                     <Btn @mousedown="setConvertToSymbol" :id="list.symbol" :class="[buttonStyleIs.dynDropList, isListConToDisplay?tide.high:tide.low]" >
                         <template #btn>
-                            <img class="border border-gray-900" :src="list.flagURL" :alt="list.description" style="width:32px; height:48px"/>
+                            <img class="border border-gray-900" :src="list.flagURL" :alt="list.description" style="width:48px; height:32px"/>
                             <span :class="symbolTextStyleIs.allsymbols"> {{ list.symbol }} </span>
                             <span class="text-sm break-normal"> [{{ list.description }}] </span>
                         </template>
