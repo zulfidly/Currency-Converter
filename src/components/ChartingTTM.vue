@@ -1,7 +1,9 @@
 <script setup>
   import { watch } from 'vue';
   import { mainObj } from './GlobalVars.vue';
+  import { google } from "https://www.gstatic.com/charts/loader.js"
   import IconClose from './icons/IconClose.vue';
+
   google.charts.load('current', { 'packages': ['corechart'] });
 
   let dimension = {
