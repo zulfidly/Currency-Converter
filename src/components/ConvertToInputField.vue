@@ -76,6 +76,10 @@
 
 <template>
     <div :class="[convFromCtnr.outestInit, isListConToDisplay?convFromCtnr.onFocusInput:convFromCtnr.outest]">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 648d347 (edit18)
         <div class="absolute left-1/2 -translate-x-1/2 lg:left-0 lg:right-full w-[100vw] h-[100svh] backdrop-blur" v-show="isListConToDisplay"></div>
 
         <div :class="[convFromCtnr.inner1]">
@@ -104,11 +108,18 @@
                 </li>
             </ul>
         </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 648d347 (edit18)
         <div id="duplicateConvertTo" v-show="!isListConToDisplay" class="h-16">
             <div class="w-full h-14"></div>
         </div>
     </div>
+<<<<<<< HEAD
 
 
     
+=======
+>>>>>>> 648d347 (edit18)
 </template>

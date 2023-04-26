@@ -77,6 +77,10 @@
 
 <template>
     <div :class="[convFromCtnr.outestInit, isListConFromDisplay?convFromCtnr.onFocusInput:convFromCtnr.outest]">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 648d347 (edit18)
         <div class="absolute left-1/2 lg:left-full -translate-x-1/2 w-[100vw] h-[100svh] backdrop-blur" v-show="isListConFromDisplay"></div>
 
         <div :class="[convFromCtnr.inner1]">
@@ -92,7 +96,10 @@
                 </Btn>
             </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 648d347 (edit18)
             <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConFromDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
                 <li :class="[ulStyleIs.noResult]" v-show="userInputConFrom!=='' && mainObj.dynList.length==0">No results</li>
                 <li v-for="list in mainObj.dynList" :class="ulStyleIs.li">
@@ -106,11 +113,18 @@
                 </li>
             </ul>
         </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 648d347 (edit18)
         <div id="duplicateConvertFrom" v-show="!isListConFromDisplay" class="h-16">
             <div class="w-full h-14 px-2 flex items-center gap-x-3 justify-center"><img class="border border-gray-900" src="https://wise.com/public-resources/assets/flags/rectangle/myr.png" style="width:48px; height:32px" alt="flag of Malaysia"/><span class="text-lg font-semibold">MYR</span><span class="text-sm break-normal"> [Malaysian Ringgit] </span><span class="absolute top-0 left-0 w-full h-full"></span></div>        
         </div>
     </div>
+<<<<<<< HEAD
 
 
     
+=======
+>>>>>>> 648d347 (edit18)
 </template>
