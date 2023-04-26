@@ -109,7 +109,7 @@
             </ul>
         </div>
         <div id="duplicateConvertFrom" v-show="!isListConFromDisplay" class="h-16">
-            <div class="w-full h-14 px-2 flex items-center gap-x-3 justify-center"><img class="border border-gray-900" src="https://wise.com/public-resources/assets/flags/rectangle/myr.png"><span class="text-lg font-semibold">MYR</span><span class="text-sm break-normal"> [Malaysian Ringgit] </span><span class="absolute top-0 left-0 w-full h-full"></span></div>        
+            <div class="w-full h-14 px-2 flex items-center gap-x-3 justify-center"><img class="border border-gray-900" src="https://wise.com/public-resources/assets/flags/rectangle/myr.png" style="width:48px; height:32px" alt="flag of Malaysia"/><span class="text-lg font-semibold">MYR</span><span class="text-sm break-normal"> [Malaysian Ringgit] </span><span class="absolute top-0 left-0 w-full h-full"></span></div>        
         </div>
     </div>
 
