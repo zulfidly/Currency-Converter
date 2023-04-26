@@ -12,7 +12,6 @@
  - the @mousedown event listener
  - the @touchmove event listener
  - the slot tag
- - use of vue-router to allow for future code expansion (currently working only on a page with HomeView mounted)
  
  ### Non/Reactive components/properties used :
  - ref() & reactive()
