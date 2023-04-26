@@ -1,6 +1,5 @@
 <script setup>
     import { RouterView, useRouter } from "vue-router"
-    // import { onBeforeMount } from 'vue';
     import { onMounted } from 'vue';
     import { defineAsyncComponent } from "vue";
     import { fetchAPI } from "./components/GlobalVars.vue"

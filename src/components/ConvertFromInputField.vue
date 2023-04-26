@@ -86,10 +86,10 @@
                 <IconList v-if="!isListConFromDisplay" @mousedown="isListConFromDisplay=!isListConFromDisplay" />
                 <SearchIcon v-else @mousedown="isListConFromDisplay=true"/>
                 <input id="inputFromField" @focus="onFocusInput" v-model.trim="userInputConFrom" :class="[inputStyle.symbolSearchInput]" placeholder="Convert from" type="text"/>
-                <Btn v-if="!isListConFromDisplay" @mousedown="clearInput" :class="[buttonStyleIs.clear]">
+                <Btn v-if="!isListConFromDisplay" @mousedown="clearInput" :class="[buttonStyleIs.clear]" aria-label="clear selection of convert from currency">
                     <template #btn>Reset</template>
                 </Btn>
-                <Btn v-else @mousedown="isListConFromDisplay=!isListConFromDisplay; userInputConFrom = ''" :class="[buttonStyleIs.clear]">
+                <Btn v-else @mousedown="isListConFromDisplay=!isListConFromDisplay; userInputConFrom = ''" :class="[buttonStyleIs.clear]" aria-label="close drop down list of convert from currency">
                     <template #btn>Close</template>
                 </Btn>
             </div>
@@ -98,7 +98,7 @@
             <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConFromDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
                 <li :class="[ulStyleIs.noResult]" v-show="userInputConFrom!=='' && mainObj.dynList.length==0">No results</li>
                 <li v-for="list in mainObj.dynList" :class="ulStyleIs.li">
-                    <Btn @mousedown="setConvertFromSymbol" :id="list.symbol" :class="[buttonStyleIs.dynDropList, isListConFromDisplay?tide.high:tide.low]" >
+                    <Btn @mousedown="setConvertFromSymbol" :id="list.symbol" :class="[buttonStyleIs.dynDropList, isListConFromDisplay?tide.high:tide.low]" :aria-label="list.symbol">
                         <template #btn>
                             <img class="border border-gray-900" :src="list.flagURL" :alt="list.description" style="width:48px; height:32px"/>
                             <span :class="symbolTextStyleIs.allsymbols"> {{ list.symbol }} </span>

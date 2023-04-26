@@ -85,10 +85,10 @@
                 <IconList v-if="!isListConToDisplay" @mousedown="isListConToDisplay=!isListConToDisplay" />
                 <SearchIcon v-else @mousedown="isListConToDisplay=true"/>
                 <input id="inputToField" @focus="onFocusInput" v-model.trim="userInputConTo" :class="[inputStyle.symbolSearchInput]" placeholder="Convert to" type="text"/>
-                <Btn v-if="!isListConToDisplay" @mousedown="clearInput" :class="[buttonStyleIs.clear]">
+                <Btn v-if="!isListConToDisplay" @mousedown="clearInput" :class="[buttonStyleIs.clear]"  aria-label="clear selection of convert to currency">
                     <template #btn>Reset</template>
                 </Btn>
-                <Btn v-else @mousedown="isListConToDisplay=!isListConToDisplay; userInputConTo = ''" :class="[buttonStyleIs.clear]">
+                <Btn v-else @mousedown="isListConToDisplay=!isListConToDisplay; userInputConTo = ''" :class="[buttonStyleIs.clear]" aria-label="close drop down list of convert to currency">
                     <template #btn>Close</template>
                 </Btn>
             </div>
@@ -96,7 +96,7 @@
             <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConToDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
                 <li :class="[ulStyleIs.noResult]" v-show="userInputConTo!=='' && mainObj.dynList.length==0">No results</li>
                 <li v-for="list in mainObj.dynList" :class="ulStyleIs.li">
-                    <Btn @mousedown="setConvertToSymbol" :id="list.symbol" :class="[buttonStyleIs.dynDropList, isListConToDisplay?tide.high:tide.low]" >
+                    <Btn @mousedown="setConvertToSymbol" :id="list.symbol" :class="[buttonStyleIs.dynDropList, isListConToDisplay?tide.high:tide.low]" :aria-label="list.symbol">
                         <template #btn>
                             <img class="border border-gray-900" :src="list.flagURL" :alt="list.description" style="width:48px; height:32px"/>
                             <span :class="symbolTextStyleIs.allsymbols"> {{ list.symbol }} </span>
