@@ -11,9 +11,7 @@
 
     const setConvertFromSymbol = (e) => {
         let x = e.target.parentElement
-        let id = e.target.parentElement.id;
-        // console.log(x.parentElement.parentElement);
-        mainObj.userSettings.convertFrom = id
+        mainObj.userSettings.convertFrom = x.firstElementChild.nextElementSibling.textContent
         document.getElementById("duplicateConvertFrom").innerHTML = `<div class="w-full h-14 px-2 flex justify-center items-center gap-x-3">${x.innerHTML}</div>`
         userInputConFrom.value = ""
         isListConFromDisplay.value = false
@@ -98,7 +96,7 @@
             <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConFromDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
                 <li :class="[ulStyleIs.noResult]" v-show="userInputConFrom!=='' && mainObj.dynList.length==0">No results</li>
                 <li v-for="list in mainObj.dynList" :class="ulStyleIs.li">
-                    <Btn @mousedown="setConvertFromSymbol" :id="list.symbol" :class="[buttonStyleIs.dynDropList, isListConFromDisplay?tide.high:tide.low]" :aria-label="list.symbol">
+                    <Btn @mousedown="setConvertFromSymbol" :class="[buttonStyleIs.dynDropList, isListConFromDisplay?tide.high:tide.low]" :aria-label="list.symbol">
                         <template #btn>
                             <img class="border border-gray-900" :src="list.flagURL" :alt="list.description" style="width:48px; height:32px"/>
                             <span :class="symbolTextStyleIs.allsymbols"> {{ list.symbol }} </span>

@@ -11,10 +11,8 @@
 
     const setConvertToSymbol = (e) => {
         let x = e.target.parentElement
-        let id = e.target.parentElement.id;
-        mainObj.userSettings.convertTo = id
+        mainObj.userSettings.convertTo = x.firstElementChild.nextElementSibling.textContent
         document.getElementById("duplicateConvertTo").innerHTML = `<div class="w-full h-14 px-2 flex justify-center items-center gap-x-3">${x.innerHTML}</div>`
-        // console.log(x.outerHTML);
         userInputConTo.value = ""
         isListConToDisplay.value = false
     }
@@ -96,7 +94,7 @@
             <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConToDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
                 <li :class="[ulStyleIs.noResult]" v-show="userInputConTo!=='' && mainObj.dynList.length==0">No results</li>
                 <li v-for="list in mainObj.dynList" :class="ulStyleIs.li">
-                    <Btn @mousedown="setConvertToSymbol" :id="list.symbol" :class="[buttonStyleIs.dynDropList, isListConToDisplay?tide.high:tide.low]" :aria-label="list.symbol">
+                    <Btn @mousedown="setConvertToSymbol" :class="[buttonStyleIs.dynDropList, isListConToDisplay?tide.high:tide.low]" :aria-label="list.symbol">
                         <template #btn>
                             <img class="border border-gray-900" :src="list.flagURL" :alt="list.description" style="width:48px; height:32px"/>
                             <span :class="symbolTextStyleIs.allsymbols"> {{ list.symbol }} </span>
