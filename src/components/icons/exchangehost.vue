@@ -3,7 +3,7 @@
 </script>
 <template>
     <button aria-label="visit the API provider website">
-        <a href="https://exchangerate.host/#/#docs" target="_blank">
+        <a href="https://exchangerate.host/#/#docs" target="_blank" aria-label="visit the API provider website">
             <svg :class="[headerStyleIs.exchost]" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                  width="275px" height="29.436px" viewBox="245.703 26.288 275 29.436" enable-background="new 245.703 26.288 275 29.436"
                  xml:space="preserve">

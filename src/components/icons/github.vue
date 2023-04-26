@@ -1,6 +1,6 @@
 <template>
     <button aria-label="visit git hub repository">
-        <a href="https://github.com" target="_blank">
+        <a href="https://github.com" target="_blank" aria-label="visit git hub repository">
             <svg :class="[headerStyleIs.github]" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              width="80px" height="80px" viewBox="-20 -20 80 80" enable-background="new -20 -20 80 80" xml:space="preserve">
                 <g>
