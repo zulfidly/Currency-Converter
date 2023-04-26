@@ -89,13 +89,13 @@
 
         <ResultDashboard>
             <template #convertBtn>
-                <button :disabled="!isSwappable" @click="swapCurrencies" :class="[swapIconStyle.init, isSwappable?swapIconStyle.swapOn:'']">
+                <button :disabled="!isSwappable" @click="swapCurrencies" :class="[swapIconStyle.init, isSwappable?swapIconStyle.swapOn:'']" aria-label="swap currencies">
                     <IconSwap />
                 </button>
-                <button :disabled="!isConvertible" @click="getConversion" :class="[buttonStyleIs.convertBtn, isConvertible?buttonStyleIs.convertBtnActive:buttonStyleIs.convertBtnNotActive]">
+                <button :disabled="!isConvertible" @click="getConversion" :class="[buttonStyleIs.convertBtn, isConvertible?buttonStyleIs.convertBtnActive:buttonStyleIs.convertBtnNotActive]" aria-label="perform currency conversion">
                     Convert
                 </button>
-                <button :disabled="!isSwappable" @click="viewTTM" >
+                <button :disabled="!isSwappable" @click="viewTTM" aria-label="view trailing twelve months chart" >
                     <IconViewTTM />
                 </button>
             </template>
