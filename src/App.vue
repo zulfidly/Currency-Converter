@@ -10,7 +10,9 @@
     const GoogleChart = defineAsyncComponent(() => 
         import("./components/ChartingTTM.vue")
     )
-    onMounted(() => { fetchAPI("constructMainObj", "https://api.exchangerate.host/symbols/") })
+    onMounted(() => { 
+        fetchAPI("constructMainObj", "https://api.exchangerate.host/symbols/") 
+    })
 
 </script>
 

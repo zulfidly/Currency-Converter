@@ -1,10 +1,11 @@
 <script setup>
-  import { watch } from 'vue';
+  import { defineComponent, watch } from 'vue';
+  import { h } from 'vue';
+  import { onMounted } from 'vue';
+  import { computed } from 'vue';
   import { mainObj } from './GlobalVars.vue';
-  import {  } from "../chartloader.js"
+  import {  } from "../chartloader.js";
   import IconClose from './icons/IconClose.vue';
-
-  google.charts.load('current', { 'packages': ['corechart'] });
 
   let dimension = {
     innerChart: {
@@ -19,17 +20,59 @@
     }
   }
 
+  onMounted(() => {
+    google.charts.load('current', { 'packages': ['corechart'] });
+  })
+
+  var chartBG_vnode = computed(() => {
+    if(mainObj.isChartDisplaying) {
+      return{ 
+        render() {
+          return h("div", { class: "fixed w-screen h-screen top-0 left-0 bg-[var(--color-background)] z-20" })
+        }
+      }
+    } else return {render() { return null }}
+  })
+  
+  var chartCtnr_vnode = computed(() => {
+    if(mainObj.isChartDisplaying) {
+      return { 
+        render() {
+          return h("div", { id: "curve_chart", class: "fixed z-20 top-0 left-0 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:top-1/2 lg:left-1/2" } )
+        }
+      }
+    } else return {render() { return null }}
+  })
+
+  var chartCloseBtn_vnode = computed(() => {
+    if(mainObj.isChartDisplaying) {
+      return { 
+        render() {
+          return h(
+            "button",
+            {
+              class: "fixed z-30 top-4 left-4 lg:left-auto lg:top-8 lg:right-8 text-[var(--color-text)]" ,
+              onmousedown: () => { mainObj.isChartDisplaying = false }
+            },
+            defineComponent(h(IconClose))
+          )
+        }
+      }
+    } else return {render() { return null }}
+  })
+
   watch(
     () => mainObj.chartingData,
-    () => { google.charts.setOnLoadCallback(drawChart) }
+    () => { 
+      google.charts.setOnLoadCallback(drawChart) 
+    },
   )
-  
+    
   window.matchMedia("(prefers-color-scheme:dark)").addEventListener("change", () => {
     if(mainObj.isChartDisplaying) google.charts.setOnLoadCallback(drawChart)
   })
 
   window.addEventListener("resize", () => {
-    // console.log('resize');
     if(mainObj.isChartDisplaying) google.charts.setOnLoadCallback(drawChart)    
   })
 
@@ -136,20 +179,11 @@
     chart.draw(data, options);
   }
 
-  const removeChart = () => {
-    mainObj.isChartDisplaying = false
-    document.getElementById("curve_chart").innerHTML = ""
-  }
 </script>
 
 <template>
-  <div class="fixed w-screen h-screen top-0 left-0 bg-[var(--color-background)] z-20" v-show="mainObj.isChartDisplaying">
-  </div>
+  <chartBG_vnode />
+  <chartCtnr_vnode />
+  <chartCloseBtn_vnode />
   
-  <div id="curve_chart" class="fixed z-20 top-0 left-0 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:top-1/2 lg:left-1/2" v-show="mainObj.isChartDisplaying"></div>
-
-  <button @mousedown="removeChart" class="fixed z-30 top-4 left-4 lg:left-auto lg:top-8 lg:right-8 text-[var(--color-text)]" v-show="mainObj.isChartDisplaying">
-      <IconClose />
-  </button>
-
 </template>
