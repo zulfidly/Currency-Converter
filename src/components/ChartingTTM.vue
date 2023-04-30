@@ -1,10 +1,8 @@
 <script setup>
   import { defineComponent, watch } from 'vue';
   import { h } from 'vue';
-  import { onMounted } from 'vue';
   import { computed } from 'vue';
   import { mainObj } from './GlobalVars.vue';
-  // import {  } from "../chartloader.js";
   import IconClose from './icons/IconClose.vue';
 
   let dimension = {
@@ -20,9 +18,6 @@
     }
   }
 
-  onMounted(() => {
-    console.log('ChartingTTM mounted');
-  })
 
   var chartBG_vnode = computed(() => {
     if(mainObj.isChartDisplaying) {
@@ -187,5 +182,4 @@
   <chartBG_vnode />
   <chartCtnr_vnode />
   <chartCloseBtn_vnode />
-  
 </template>

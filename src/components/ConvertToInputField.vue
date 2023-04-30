@@ -2,16 +2,10 @@
     import { watch, ref, computed } from "vue";
     import { h } from "vue"
     import { mainObj } from "./GlobalVars.vue"
-    import { onMounted } from "vue"
     import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "./GlobalVars.vue"
     import Btn from "./Button.vue"
     import SearchIcon from "./icons/SearchIcon.vue"
     import IconList from "./icons/IconList.vue";
-
-    onMounted(() => {
-        console.log('ConvertToInputField mounted');
-    })
-
 
     const userInputConTo = ref()
     var isListConToDisplay = ref(false)
@@ -63,7 +57,7 @@
     )
 
     const clearInput = () => {
-        console.log(mainObj.fetched);
+        // console.log(mainObj.fetched);
         userInputConTo.value = ""
         mainObj.fetched = {}
         mainObj.userSettings.convertTo = undefined
@@ -126,6 +120,41 @@
             }
         } else return {render() { return null }}
     })
+    var resetOrCloseBtn = computed(() => {
+        if(isListConToDisplay.value) {
+            return {
+                render() {
+                    return h(
+                        Btn,
+                        {
+                            class: buttonStyleIs.clear,
+                            ariaLabel: "close drop down list of convert to currency",
+                            onmousedown: () => { isListConToDisplay.value =! isListConToDisplay.value },
+                        },
+                        {
+                            btn: () => "Close"
+                        }
+                    )
+                }
+            }
+        } else {
+            return {
+                render() {
+                    return h(
+                        Btn,
+                        {
+                            class: buttonStyleIs.clear,
+                            ariaLabel: "clear selection of convert to currency",
+                            onmousedown: () => clearInput(),
+                        },
+                        {
+                            btn: () => "Reset"
+                        }
+                    )
+                }
+            }
+        }
+    })
 
 </script>
 
@@ -138,19 +167,15 @@
                 <IconList v-if="!isListConToDisplay" @mousedown="isListConToDisplay=!isListConToDisplay" />
                 <SearchIcon v-else @mousedown="isListConToDisplay=true"/>
                 <input id="inputToField" @focus="onFocusInput" v-model.trim="userInputConTo" :class="[inputStyle.symbolSearchInput]" placeholder="Convert to" type="text"/>
-                <Btn v-if="!isListConToDisplay" @mousedown="clearInput" :class="[buttonStyleIs.clear]"  aria-label="clear selection of convert to currency">
-                    <template #btn>Reset</template>
-                </Btn>
-                <Btn v-else @mousedown="isListConToDisplay=!isListConToDisplay; userInputConTo = ''" :class="[buttonStyleIs.clear]" aria-label="close drop down list of convert to currency">
-                    <template #btn>Close</template>
-                </Btn>
+                <resetOrCloseBtn />
             </div>
     
-            <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConToDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
+            <ul @touchmove.passive="blurInput" :class="[ulStyleIs.init, isListConToDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
                 <isNoResultsTrue />
                 <dropDownList />
             </ul>
         </div>
+
         <div id="duplicateConvertTo" v-show="!isListConToDisplay" class="h-16">
             <div class="w-full h-14"></div>
         </div>

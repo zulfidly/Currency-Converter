@@ -1,18 +1,12 @@
 <script setup>
     import { watch, ref, computed } from "vue";
     import { h } from "vue"
-    import { onMounted } from "vue"
     import { mainObj } from "./GlobalVars.vue"
     import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "./GlobalVars.vue"
     import Btn from "./Button.vue"
     import SearchIcon from "./icons/SearchIcon.vue"
     import IconList from "./icons/IconList.vue"
 
-
-    onMounted(() => {
-        console.log('ConvertFromInputField mounted');
-    })
-    
     const userInputConFrom = ref()
     var isListConFromDisplay = ref(false)
 
@@ -124,6 +118,41 @@
             }
         } else return {render() { return null }}
     })
+    var resetOrCloseBtn = computed(() => {
+        if(isListConFromDisplay.value) {
+            return {
+                render() {
+                    return h(
+                        Btn,
+                        {
+                            class: buttonStyleIs.clear,
+                            ariaLabel: "close drop down list of convert from currency",
+                            onmousedown: () => { isListConFromDisplay.value =! isListConFromDisplay.value },
+                        },
+                        {
+                            btn: () => "Close"
+                        }
+                    )
+                }
+            }
+        } else {
+            return {
+                render() {
+                    return h(
+                        Btn,
+                        {
+                            class: buttonStyleIs.clear,
+                            ariaLabel: "clear selection of convert from currency",
+                            onmousedown: () => clearInput(),
+                        },
+                        {
+                            btn: () => "Reset"
+                        }
+                    )
+                }
+            }
+        }
+    })
 </script>
 
 <template>
@@ -135,24 +164,17 @@
                 <IconList v-if="!isListConFromDisplay" @mousedown="isListConFromDisplay=!isListConFromDisplay" />
                 <SearchIcon v-else @mousedown="isListConFromDisplay=true"/>
                 <input id="inputFromField" @focus="onFocusInput" v-model.trim="userInputConFrom" :class="[inputStyle.symbolSearchInput]" placeholder="Convert from" type="text"/>
-                <Btn v-if="!isListConFromDisplay" @mousedown="clearInput" :class="[buttonStyleIs.clear]" aria-label="clear selection of convert from currency">
-                    <template #btn>Reset</template>
-                </Btn>
-                <Btn v-else @mousedown="isListConFromDisplay=!isListConFromDisplay; userInputConFrom = ''" :class="[buttonStyleIs.clear]" aria-label="close drop down list of convert from currency">
-                    <template #btn>Close</template>
-                </Btn>
+                <resetOrCloseBtn />
             </div>
 
-            <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConFromDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
+            <ul @touchmove.passive="blurInput" :class="[ulStyleIs.init, isListConFromDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
                 <isNoResultsTrue />
                 <dropDownList />
             </ul>
-
-
         </div>
+
         <div id="duplicateConvertFrom" v-show="!isListConFromDisplay" class="h-16">
-            <div class="w-full h-14"></div>
-            <!-- <div class="w-full h-14 px-2 flex items-center gap-x-3 justify-center"><img class="border border-gray-900" src="https://wise.com/public-resources/assets/flags/rectangle/myr.png" style="width:48px; height:32px" alt="flag of Malaysia"/><span class="text-lg font-semibold">MYR</span><span class="text-sm break-normal"> [Malaysian Ringgit] </span><span class="absolute top-0 left-0 w-full h-full"></span></div>         -->
+            <div class="w-full h-14 px-2 flex items-center gap-x-3 justify-center"><img class="border border-gray-900" src="/myr.png" style="width:48px; height:32px" alt="flag of Malaysia"/><span class="text-lg font-semibold">MYR</span><span class="text-sm break-normal"> [Malaysian Ringgit] </span><span class="absolute top-0 left-0 w-full h-full"></span></div>        
         </div>
     </div>
 </template>

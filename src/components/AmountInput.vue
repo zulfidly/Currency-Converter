@@ -1,6 +1,5 @@
 <script setup>
     import { ref, computed, watch } from 'vue';
-    import { onMounted } from 'vue';
     import { mainObj } from './GlobalVars.vue';
     import { fetchAPI } from './GlobalVars.vue';
     import { getStartEndDates } from './GlobalVars.vue';
@@ -9,10 +8,6 @@
     import ResultDashboard from './ResultDashboard.vue';
     import IconSwap from './icons/IconSwap.vue';
     import IconViewTTM from "./icons/IconViewTTM.vue"
-
-    onMounted(() => {
-        console.log('AmountInput mounted');
-    })
 
     const amtInput = ref("")
 

@@ -1,7 +1,7 @@
 <script setup>
     import { mainObj } from '../GlobalVars.vue';
     import { viewTTMstyle } from '../GlobalVars.vue';
-    import { computed } from '@vue/reactivity';
+    import { computed } from 'vue';
 
     const isChartViewable = computed(() => {
         let x = mainObj.userSettings.convertFrom
