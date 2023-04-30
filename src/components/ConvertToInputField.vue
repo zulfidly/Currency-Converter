@@ -1,5 +1,6 @@
 <script setup>
-    import { watch, ref } from "vue";
+    import { watch, ref, computed } from "vue";
+    import { h } from "vue"
     import { mainObj } from "./GlobalVars.vue"
     import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "./GlobalVars.vue"
     import Btn from "./Button.vue"
@@ -72,6 +73,54 @@
         let x = document.getElementById("inputToField")
         x.blur()
     }
+
+    var isNoResultsTrue = computed(() => {
+        if(userInputConTo!=='' && mainObj.dynList.length==0) {
+            return {
+                 render() {
+                    return h(
+                        'li',
+                        {
+                            class: ulStyleIs.noResult,
+                            innerHTML: "No results"
+                        }
+                    )
+                 }
+            }
+        }
+        else return {render() { return null }}
+    })
+
+    var dropDownList = computed(() => {
+        if(isListConToDisplay.value) {
+            return {
+                render() {
+                    return mainObj.dynList.map(list => {
+                        return h(
+                            "li",
+                            { class: ulStyleIs.li, },
+                            h(
+                                Btn,
+                                {
+                                    class: [buttonStyleIs.dynDropList, isListConToDisplay.value?tide.high:tide.low],
+                                    ariaLabel: list.symbol,
+                                    onmousedown: (e) => setConvertToSymbol(e),
+                                },
+                                {
+                                    btn : () => [
+                                        h('img', {class: 'border border-gray-900', style: {width:'48px', height:'32px'}, src: list.flagURL, alt: list.description,}),
+                                        h('span', {class: symbolTextStyleIs.allsymbols, innerHTML: list.symbol}),
+                                        h('span', {class: "text-sm break-normal", innerHTML: list.description}),
+                                    ]                                    
+                                }
+                            ),
+                        )    
+                    })
+                }
+            }
+        } else return {render() { return null }}
+    })
+
 </script>
 
 <template>
@@ -92,16 +141,8 @@
             </div>
     
             <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConToDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
-                <li :class="[ulStyleIs.noResult]" v-show="userInputConTo!=='' && mainObj.dynList.length==0">No results</li>
-                <li v-for="list in mainObj.dynList" :class="ulStyleIs.li">
-                    <Btn @mousedown="setConvertToSymbol" :class="[buttonStyleIs.dynDropList, isListConToDisplay?tide.high:tide.low]" :aria-label="list.symbol">
-                        <template #btn>
-                            <img class="border border-gray-900" :src="list.flagURL" :alt="list.description" style="width:48px; height:32px"/>
-                            <span :class="symbolTextStyleIs.allsymbols"> {{ list.symbol }} </span>
-                            <span class="text-sm break-normal"> [{{ list.description }}] </span>
-                        </template>
-                    </Btn>
-                </li>
+                <isNoResultsTrue />
+                <dropDownList />
             </ul>
         </div>
         <div id="duplicateConvertTo" v-show="!isListConToDisplay" class="h-16">
@@ -109,3 +150,5 @@
         </div>
     </div>
 </template>
+
+

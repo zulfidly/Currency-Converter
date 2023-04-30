@@ -1,5 +1,6 @@
 <script setup>
     import { watch, ref, computed } from "vue";
+    import { h } from "vue"
     import { mainObj } from "./GlobalVars.vue"
     import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "./GlobalVars.vue"
     import Btn from "./Button.vue"
@@ -15,7 +16,6 @@
         document.getElementById("duplicateConvertFrom").innerHTML = `<div class="w-full h-14 px-2 flex justify-center items-center gap-x-3">${x.innerHTML}</div>`
         userInputConFrom.value = ""
         isListConFromDisplay.value = false
-
     }
     watch (
         () => mainObj.userSettings.convertFrom,
@@ -65,7 +65,6 @@
 
     const onFocusInput = () => {
         isListConFromDisplay.value = true
-        // isListConFromDisplay.value = !isListConFromDisplay.value
         userInputConFrom.value = ""
     }
     const blurInput = () => {
@@ -73,6 +72,52 @@
         x.blur()
     }
 
+    var isNoResultsTrue = computed(() => {
+        if(userInputConFrom!=='' && mainObj.dynList.length==0) {
+            return {
+                 render() {
+                    return h(
+                        'li',
+                        {
+                            class: ulStyleIs.noResult,
+                            innerHTML: "No results"
+                        }
+                    )
+                 }
+            }
+        }
+        else return {render() { return null }}
+    })
+
+    var dropDownList = computed(() => {
+        if(isListConFromDisplay.value) {
+            return {
+                render() {
+                    return mainObj.dynList.map(list => {
+                        return h(
+                            "li",
+                            { class: ulStyleIs.li, },
+                            h(
+                                Btn,
+                                {
+                                    class: [buttonStyleIs.dynDropList, isListConFromDisplay.value?tide.high:tide.low],
+                                    ariaLabel: list.symbol,
+                                    onmousedown: (e) => setConvertFromSymbol(e),
+                                },
+                                {
+                                    btn : () => [
+                                        h('img', {class: 'border border-gray-900', style: {width:'48px', height:'32px'}, src: list.flagURL, alt: list.description,}),
+                                        h('span', {class: symbolTextStyleIs.allsymbols, innerHTML: list.symbol}),
+                                        h('span', {class: "text-sm break-normal", innerHTML: list.description}),
+                                    ]                                    
+                                }
+                            ),
+                        )    
+                    })
+                }
+            }
+        } else return {render() { return null }}
+    })
 </script>
 
 <template>
@@ -93,20 +138,17 @@
             </div>
 
             <ul @touchmove="blurInput" :class="[ulStyleIs.init, isListConFromDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
-                <li :class="[ulStyleIs.noResult]" v-show="userInputConFrom!=='' && mainObj.dynList.length==0">No results</li>
-                <li v-for="list in mainObj.dynList" :class="ulStyleIs.li">
-                    <Btn @mousedown="setConvertFromSymbol" :class="[buttonStyleIs.dynDropList, isListConFromDisplay?tide.high:tide.low]" :aria-label="list.symbol">
-                        <template #btn>
-                            <img class="border border-gray-900" :src="list.flagURL" :alt="list.description" style="width:48px; height:32px"/>
-                            <span :class="symbolTextStyleIs.allsymbols"> {{ list.symbol }} </span>
-                            <span class="text-sm break-normal"> [{{ list.description }}] </span>
-                        </template>
-                    </Btn>
-                </li>
+                <isNoResultsTrue />
+                <dropDownList />
             </ul>
+
+
         </div>
         <div id="duplicateConvertFrom" v-show="!isListConFromDisplay" class="h-16">
             <div class="w-full h-14 px-2 flex items-center gap-x-3 justify-center"><img class="border border-gray-900" src="https://wise.com/public-resources/assets/flags/rectangle/myr.png" style="width:48px; height:32px" alt="flag of Malaysia"/><span class="text-lg font-semibold">MYR</span><span class="text-sm break-normal"> [Malaysian Ringgit] </span><span class="absolute top-0 left-0 w-full h-full"></span></div>        
         </div>
     </div>
 </template>
+
+
+

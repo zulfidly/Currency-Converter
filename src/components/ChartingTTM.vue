@@ -54,7 +54,7 @@
               class: "fixed z-30 top-4 left-4 lg:left-auto lg:top-8 lg:right-8 text-[var(--color-text)]" ,
               onmousedown: () => { mainObj.isChartDisplaying = false }
             },
-            defineComponent(h(IconClose))
+            defineComponent(h(IconClose)),
           )
         }
       }
