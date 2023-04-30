@@ -1,12 +1,18 @@
 <script setup>
     import { watch, ref, computed } from "vue";
     import { h } from "vue"
+    import { onMounted } from "vue"
     import { mainObj } from "./GlobalVars.vue"
     import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "./GlobalVars.vue"
     import Btn from "./Button.vue"
     import SearchIcon from "./icons/SearchIcon.vue"
     import IconList from "./icons/IconList.vue"
 
+
+    onMounted(() => {
+        console.log('ConvertFromInputField mounted');
+    })
+    
     const userInputConFrom = ref()
     var isListConFromDisplay = ref(false)
 

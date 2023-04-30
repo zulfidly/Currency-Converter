@@ -21,7 +21,8 @@
   }
 
   onMounted(() => {
-    google.charts.load('current', { 'packages': ['corechart'] });
+    console.log('ChartingTTM mounted');
+    // google.charts.load('current', { 'packages': ['corechart'] });
   })
 
   var chartBG_vnode = computed(() => {
@@ -180,6 +181,11 @@
   }
 
 </script>
+
+<!-- <script defer>
+  import {} from 'https://www.gstatic.com/charts/loader.js'
+</script> -->
+
 
 <template>
   <chartBG_vnode />

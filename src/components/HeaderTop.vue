@@ -2,6 +2,11 @@
     import github from './icons/github.vue';
     import exchangehost from './icons/exchangehost.vue';
     import { headerStyleIs } from './GlobalVars.vue';
+    import { onMounted } from 'vue';
+
+    onMounted(() => {
+        console.log('HeaderTop mounted');
+    })
 </script>
 
 <template>
