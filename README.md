@@ -99,7 +99,7 @@ const dateFormatter = (d) => {
     google.charts.setOnLoadCallback(drawChart);
 ```
 ### Improved page load performance by reducing number of DOM elements rendered during page load
-- this is achieved by using Vue3's render function, for example on creating vnodes of li(s)  :
+- this is achieved by using Vue3's render function, for example on creating vnodes of li(s) upon user interaction (button click) :
 ```
     var dropDownList = computed(() => {
         if(isListConFromDisplay.value) {
