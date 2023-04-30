@@ -98,3 +98,37 @@ const dateFormatter = (d) => {
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(drawChart);
 ```
+### Improved page load performance by reducing number of DOM elements rendered during page load
+- this is achieved by using render function, for example on a '<li>'  :
+```
+    var dropDownList = computed(() => {
+        if(isListConFromDisplay.value) {
+            return {
+                render() {
+                    return mainObj.dynList.map(list => {
+                        return h(
+                            "li",
+                            { class: ulStyleIs.li, },
+                            h(
+                                Btn,
+                                {
+                                    class: [buttonStyleIs.dynDropList, isListConFromDisplay.value?tide.high:tide.low],
+                                    ariaLabel: list.symbol,
+                                    onmousedown: (e) => setConvertFromSymbol(e),
+                                },
+                                {
+                                    btn : () => [
+                                        h('img', {class: 'border border-gray-900', style: {width:'48px', height:'32px'}, src: list.flagURL, alt: list.description,}),
+                                        h('span', {class: symbolTextStyleIs.allsymbols, innerHTML: list.symbol}),
+                                        h('span', {class: "text-sm break-normal", innerHTML: list.description}),
+                                    ]                                    
+                                }
+                            ),
+                        )    
+                    })
+                }
+            }
+        } else return {render() { return null }}
+    })
+
+```
