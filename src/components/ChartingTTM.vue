@@ -64,6 +64,7 @@
   watch(
     () => mainObj.chartingData,
     () => { 
+      google.charts.load('current', { 'packages': ['corechart'] });            
       google.charts.setOnLoadCallback(drawChart) 
     },
   )
@@ -106,8 +107,9 @@
 
   function drawChart() {
     if(!mainObj.isChartDisplaying) return
+
     setChartDimension()
-    // console.log('drawChart');
+
     var r = document.querySelector(':root')
     var rs = getComputedStyle(r)
     let txtClr = rs.getPropertyValue("--chart-text").trim()
@@ -180,11 +182,6 @@
   }
 
 </script>
-
-<!-- <script defer>
-  import {} from 'https://www.gstatic.com/charts/loader.js'
-</script> -->
-
 
 <template>
   <chartBG_vnode />

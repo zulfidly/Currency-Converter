@@ -9,9 +9,9 @@
 
     onMounted(() => { 
         setTimeout(() => {
-            google.charts.load('current', { 'packages': ['corechart'] });            
+            // google.charts.load('current', { 'packages': ['corechart'] });            
             fetchAPI("constructMainObj", "https://api.exchangerate.host/symbols/") 
-        }, 2000)
+        }, 1500)
         console.log('App mounted');
     })
 </script>
