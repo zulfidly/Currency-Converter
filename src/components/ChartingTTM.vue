@@ -4,7 +4,7 @@
   import { onMounted } from 'vue';
   import { computed } from 'vue';
   import { mainObj } from './GlobalVars.vue';
-  import {  } from "../chartloader.js";
+  // import {  } from "../chartloader.js";
   import IconClose from './icons/IconClose.vue';
 
   let dimension = {
