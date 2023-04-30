@@ -1,5 +1,4 @@
 <script setup>
-    import { defineAsyncComponent } from 'vue';
     import github from './icons/github.vue';
     import exchangehost from './icons/exchangehost.vue';
     import { headerStyleIs } from './GlobalVars.vue';
