@@ -22,7 +22,6 @@
 
   onMounted(() => {
     console.log('ChartingTTM mounted');
-    // google.charts.load('current', { 'packages': ['corechart'] });
   })
 
   var chartBG_vnode = computed(() => {
