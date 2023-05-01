@@ -10,7 +10,6 @@
   }
 }
 
-
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -20,17 +19,15 @@
 
 @media (min-width: 1024px) {
   body {
+    min-height: 100vh;
     display: flex;
-    /* place-items: center; */
     justify-items: center;
     align-items: flex-start;
-    /* margin-top: 10px; */
   }
 
   #app {
     display: grid;
     grid-template-columns: 500px 500px;
-    /* padding: 0rem; */
   }
 }
 
