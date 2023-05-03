@@ -1,4 +1,3 @@
-<script>
     import { reactive } from 'vue';
     import axios from 'axios';
 
@@ -256,4 +255,3 @@
         })    
         mainObj.isChartDisplaying =  true
     }
-</script>

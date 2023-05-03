@@ -2,7 +2,7 @@
   import { defineComponent, watch } from 'vue';
   import { h } from 'vue';
   import { computed } from 'vue';
-  import { mainObj } from './GlobalVars.vue';
+  import { mainObj } from '../GlobalVars.js';
   import IconClose from './icons/IconClose.vue';
 
   let dimension = {

@@ -1,6 +1,6 @@
 <script setup>
-    import { dashboardStyle, fetchErrorStyle } from './GlobalVars.vue';
-    import { mainObj } from './GlobalVars.vue';
+    import { dashboardStyle, fetchErrorStyle } from '../GlobalVars.js';
+    import { mainObj } from '../GlobalVars.js';
 </script>
 
 <template>

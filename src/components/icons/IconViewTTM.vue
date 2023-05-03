@@ -1,6 +1,6 @@
 <script setup>
-    import { mainObj } from '../GlobalVars.vue';
-    import { viewTTMstyle } from '../GlobalVars.vue';
+    import { mainObj } from '../../GlobalVars.js';
+    import { viewTTMstyle } from '../../GlobalVars.js';
     import { computed } from 'vue';
 
     const isChartViewable = computed(() => {

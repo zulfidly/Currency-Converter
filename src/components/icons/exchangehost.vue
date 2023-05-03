@@ -1,5 +1,5 @@
 <script setup>
-    import { headerStyleIs } from '../GlobalVars.vue';
+    import { headerStyleIs } from '../../GlobalVars.js';
 </script>
 <template>
     <button aria-label="visit the API provider website">

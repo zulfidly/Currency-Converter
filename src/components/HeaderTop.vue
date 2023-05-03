@@ -1,7 +1,7 @@
 <script setup>
     import github from './icons/github.vue';
     import exchangehost from './icons/exchangehost.vue';
-    import { headerStyleIs } from './GlobalVars.vue';
+    import { headerStyleIs } from '../GlobalVars.js';
 
 </script>
 

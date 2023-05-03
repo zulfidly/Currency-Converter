@@ -21,5 +21,5 @@
 </template>
 
 <script setup>
-    import { headerStyleIs } from '../GlobalVars.vue';
+    import { headerStyleIs } from '../../GlobalVars.js';
 </script>

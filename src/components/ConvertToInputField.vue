@@ -1,10 +1,10 @@
 <script setup>
     import { watch, ref, computed } from "vue";
     import { h } from "vue"
-    import { mainObj } from "./GlobalVars.vue"
-    import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "./GlobalVars.vue"
+    import { mainObj } from "../GlobalVars.js"
+    import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "../GlobalVars.js"
     import Btn from "./Button.vue"
-    import SearchIcon from "./icons/SearchIcon.vue"
+    import SearchIcon from "./icons/IconSearch.vue"
     import IconList from "./icons/IconList.vue";
 
     const userInputConTo = ref()
