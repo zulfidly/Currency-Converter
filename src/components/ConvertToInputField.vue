@@ -3,7 +3,7 @@
     import { h } from "vue"
     import { mainObj } from "../GlobalVars.js"
     import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "../GlobalVars.js"
-    import Btn from "./Button.vue"
+    import BtnComp from "./CustomButton.vue"
     import SearchIcon from "./icons/IconSearch.vue"
     import IconList from "./icons/IconList.vue";
 
@@ -100,7 +100,7 @@
                             "li",
                             { class: ulStyleIs.li, },
                             h(
-                                Btn,
+                                BtnComp,
                                 {
                                     class: [buttonStyleIs.dynDropList, isListConToDisplay.value?tide.high:tide.low],
                                     ariaLabel: list.symbol,
@@ -120,12 +120,12 @@
             }
         } else return {render() { return null }}
     })
-    var resetOrCloseBtn = computed(() => {
+    var resetOrCloseBtnComp = computed(() => {
         if(isListConToDisplay.value) {
             return {
                 render() {
                     return h(
-                        Btn,
+                        BtnComp,
                         {
                             class: buttonStyleIs.clear,
                             ariaLabel: "close drop down list of convert to currency",
@@ -141,7 +141,7 @@
             return {
                 render() {
                     return h(
-                        Btn,
+                        BtnComp,
                         {
                             class: buttonStyleIs.clear,
                             ariaLabel: "clear selection of convert to currency",
@@ -167,7 +167,7 @@
                 <IconList v-if="!isListConToDisplay" @mousedown="isListConToDisplay=!isListConToDisplay" />
                 <SearchIcon v-else @mousedown="isListConToDisplay=true"/>
                 <input id="inputToField" @focus="onFocusInput" v-model.trim="userInputConTo" :class="[inputStyle.symbolSearchInput]" placeholder="Convert to" type="text"/>
-                <resetOrCloseBtn />
+                <resetOrCloseBtnComp />
             </div>
     
             <ul @touchmove.passive="blurInput" :class="[ulStyleIs.init, isListConToDisplay?ulStyleIs.show:ulStyleIs.hide]"  >

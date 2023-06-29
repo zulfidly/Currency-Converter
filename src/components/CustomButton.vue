@@ -5,11 +5,15 @@
             type: String,
             required: true,
         },
+        templateRef: {
+            type: Function,
+            // required: true,
+        },
     })
 </script>
 
 <template>
-    <button :aria-label="ariaLabel">
+    <button :ref="templateRef" :aria-label="ariaLabel">
         <slot name="btn"></slot>
         <btnsensor/>
     </button>

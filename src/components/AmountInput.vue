@@ -2,11 +2,9 @@
     import { ref, computed, watch } from 'vue';
     import { mainObj } from '../GlobalVars.js';
     import { fetchAPI } from '../GlobalVars.js';
-    // import { fetchAPI } from './GlobalVars.vue';
     import { getStartEndDates } from '../GlobalVars.js';
     import { swapCurrencies } from '../GlobalVars.js';
     import { buttonStyleIs, inputStyle, dashboardStyle, swapIconStyle } from '../GlobalVars.js';
-    // import { buttonStyleIs, inputStyle, dashboardStyle, swapIconStyle } from './GlobalVars.vue';
     import ResultDashboard from './ResultDashboard.vue';
     import IconSwap from './icons/IconSwap.vue';
     import IconViewTTM from "./icons/IconViewTTM.vue"

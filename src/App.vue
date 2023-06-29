@@ -1,6 +1,5 @@
 <script setup>
     import { onMounted } from 'vue';
-    import { onBeforeMount } from 'vue';
     import { fetchAPI } from "./GlobalVars.js"
     import HeaderTop from "./components/HeaderTop.vue";
     import ConvertFromInputField from './components/ConvertFromInputField.vue';

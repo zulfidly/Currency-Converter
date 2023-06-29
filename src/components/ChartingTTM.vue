@@ -18,7 +18,6 @@
     }
   }
 
-
   var chartBG_vnode = computed(() => {
     if(mainObj.isChartDisplaying) {
       return{ 
