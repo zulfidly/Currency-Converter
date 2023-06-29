@@ -8,18 +8,18 @@
   html {
     -webkit-tap-highlight-color: transparent;
   }
-}
-*::-webkit-scrollbar { /* hide scrollbar in Chrome */
-  display: none;
-}  
-* {
-  transition: color 0.3s, background-color 0.3s;
-  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
-  scrollbar-width: none;  /* Hide scrollbar for Firefox */
-  scroll-behavior: smooth;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  *::-webkit-scrollbar { /* hide scrollbar in Chrome */
+    display: none;
+  }  
+  * {
+    transition: color 0.3s, background-color 0.3s;
+    -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+    scrollbar-width: none;  /* Hide scrollbar for Firefox */
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
 #app {
