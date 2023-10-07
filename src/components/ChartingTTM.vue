@@ -74,7 +74,6 @@
   function setChartDimension() { 
     let isPortrait = matchMedia("(orientation:portrait)").matches
     let isMobile = matchMedia("(max-width:1024px)").matches
-    // console.log(isMobile);
     if(isMobile && isPortrait) {
       dimension.innerChart.W = screen.width * 0.75
       dimension.innerChart.H = window.innerHeight * 0.7

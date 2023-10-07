@@ -37,12 +37,12 @@
             }
         }
     )
-
+    const ACCESS_KEY = import.meta.env.VITE_ACCESS_KEY
     const getConversion = () => {
         let base = mainObj.userSettings.convertFrom
         let res = mainObj.userSettings.convertTo
         let amt = mainObj.userSettings.amount
-        let str = `${mainObj.netlifyURL}/convert?access_key=de421138240d84290a01b8eef88060c9` + `&from=${base}` + `&to=${res}` + `&amount=${amt}`
+        let str = `${mainObj.netlifyURL}/convert?access_key=${ACCESS_KEY}` + `&from=${base}` + `&to=${res}` + `&amount=${amt}`
         fetchAPI(`convertEndpoint`, str)
     }
 
@@ -52,7 +52,7 @@
         let amt = mainObj.userSettings.amount || "1"
         let x = getStartEndDates()
         // console.log(x);
-        let str = `${mainObj.netlifyURL}/timeframe?access_key=de421138240d84290a01b8eef88060c9` + `&base=${base}` + `&symbols=${res}` + `&amount=${amt}` + `&start_date=${x.startDate}` + `&end_date=${x.endDate}`
+        let str = `${mainObj.netlifyURL}/timeframe?access_key=${ACCESS_KEY}` + `&base=${base}` + `&symbols=${res}` + `&amount=${amt}` + `&start_date=${x.startDate}` + `&end_date=${x.endDate}`
         fetchAPI("getChartingData", str)
     }
 

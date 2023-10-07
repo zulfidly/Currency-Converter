@@ -179,7 +179,6 @@
             <ul @touchmove.passive="blurInput" :class="[ulStyleIs.init, isListConFromDisplay?ulStyleIs.show:ulStyleIs.hide]"  >
                 <isNoResultsTrue />
                 <drop-down-list />
-                <!-- <dropDownList /> -->
             </ul>
         </div>
 
