@@ -172,7 +172,7 @@
             <div :class="[convFromCtnr.inner2]">
                 <IconList v-if="isListConFromDisplay==false" @iconlist-emit="toggleList" />
                 <IconSearch v-else @iconsearch-emit="isListConFromDisplay=true"/>
-                <input ref="inputFromField" @focus="onFocusInput" v-model.trim="userInputConFrom" :class="[inputStyle.symbolSearchInput]" placeholder="Convert from" type="text"/>
+                <input name="inputFrom" ref="inputFromField" @focus="onFocusInput" v-model.trim="userInputConFrom" :class="[inputStyle.symbolSearchInput]" placeholder="Convert from" type="text"/>
                 <resetOrCloseBtnComp />
             </div>
 
