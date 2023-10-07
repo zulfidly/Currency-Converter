@@ -8,8 +8,9 @@
     import AmountInput from './components/AmountInput.vue';
     import GoogleChart from './components/ChartingTTM.vue'
 
+    const ACCESS_KEY = import.meta.env.ACCESS_KEY
     onMounted(() => { 
-        fetchAPI("constructMainObj", `${mainObj.netlifyURL}/list?access_key=${process.env.ACCESS_KEY}`) 
+        fetchAPI("constructMainObj", `${mainObj.netlifyURL}/list?access_key=${ACCESS_KEY}`) 
     })
 </script>
 
