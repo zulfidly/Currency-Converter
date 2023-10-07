@@ -30,7 +30,7 @@
         mainObj.isFetchError = false
         mainObj.isFetching = true
         axios
-            .get(endpoint, {timeout: 3000})
+            .get(endpoint, {timeout: 8000})
             .then((response) => {
                 funcLib[fu](response.data)
                 mainObj.isFetching = false
@@ -40,26 +40,26 @@
                  reInitStates()
                  mainObj.isFetchError = true
                  mainObj.fetched.result = "*timeout*"
-                })
+            })
     }
     const funcLib = {
         constructMainObj : function(x) {
-            let y = new Map(Object.entries(x.symbols))
+            let y = new Map(Object.entries(x.currencies))
             let array = []
             y.forEach((v, k) => {
-                let temp = { symbol: k, description: v.description, flagURL:flagScrapper(k.toLowerCase()) }
+                let temp = { symbol: k, description: v, flagURL:flagScrapper(k.toLowerCase()) }
                 array.push(temp)
             })
             mainObj.allSymbols = array
             mainObj.dynList = array
         },
         convertEndpoint : function(x) {
-            mainObj.fetched.lastUpdated = "last updated " + dateFormatter(x.date)
-            mainObj.fetched.rate = rateStringFormatter(x.info.rate)
+            mainObj.fetched.lastUpdated = "last updated " + dateFormatter(x.info.timestamp)
+            mainObj.fetched.rate = rateStringFormatter(x.info.quote)
             mainObj.fetched.result = currencyFormatter(mainObj.userSettings.convertTo, x.result)
         },
         getChartingData: function(x) {
-            let y = new Map(Object.entries(x.rates))
+            let y = new Map(Object.entries(x.quotes))
             structureChartData(y)
         }
     }
@@ -142,7 +142,6 @@
 //////// dashboard stylings
     export const dashboardStyle = {
         outest: ["lg:col-span-2"],
-        // outestHide: ["opacity-0"],
         ctnr: ["grid lg:block grid-cols-1 gap-y-4 mt-5 lg:col-span-2"],
         convertBtnDiv: ["flex justify-evenly"],
         baseNameTag: ["bg-[var(--color-background-mute)] rounded-l-md text-xl h-[50px] px-3 flex items-center border-dotted border-r-[0.5px] border-[var(--color-text)]"],
@@ -156,12 +155,10 @@
 
 //////// helper functions
     const flagScrapper = (x) => {
-      const noflag = "cuc, cnh, btc, clf, mru, sdg, ssp, stn, ves, xag, xau, xdr, xpd, zwl, xpt"
+      const noflag = "cuc, cnh, btc, clf, mru, sdg, ssp, stn, ves, xag, xau, xdr, xpd, zwl, xpt, zmk, sle, lvl, byr"
       x = x.toLowerCase()
       if(noflag.includes(x)) {
-        //   return "https://icons.iconarchive.com/icons/iconsmind/outline/48/Dollar-Sign-icon.png"
           return "/IconDollar.svg"
-        //   return "src/components/icons/IconDollar.svg"
       } else {
           return `https://wise.com/public-resources/assets/flags/rectangle/${x}.png`
       }
@@ -205,7 +202,6 @@
         } else { console.log('invalid time format in CSS');}
 
         setTimeout(() => {
-            // console.log(delay, 'setTimeout at swap currencies');
             Fid.classList.remove("swappingFrom_To")
             Fid.classList.remove("swappingTo_From")
             Tid.classList.remove("swappingFrom_To")
@@ -236,7 +232,6 @@
         const start_m = new Date(now - year - day).getMonth() + 1     // API max time frame is 366 days, Jan is 0
         const start_y = new Date(now - year - day).getFullYear()      // in YYYY
         const start_date = start_y.toString().padStart(2, "0") + "-" + start_m.toString().padStart(2, "0") + "-" + start_d.toString().padStart(2, "0") 
-        // console.log(start_date, "to", end_date);
         return { startDate: start_date, endDate: end_date }
     }
     
@@ -244,7 +239,6 @@
         mainObj.chartingData = [["Date", "Rates"]]
         let temp = []
         let regex = new RegExp("/", "g")
-        console.log();
         map.forEach((rate, date) => {
             let d = new Intl.DateTimeFormat('en-GB', { dateStyle: 'short'}).format(new Date(date))
             d = d.replace(regex, "-")

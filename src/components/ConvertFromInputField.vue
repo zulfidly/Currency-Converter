@@ -1,5 +1,5 @@
 <script setup>
-    import { watch, ref, computed, defineComponent } from "vue";
+    import { watch, ref, computed } from "vue";
     import { h } from "vue"
     import { mainObj } from "../GlobalVars.js"
     import { symbolTextStyleIs, buttonStyleIs, ulStyleIs, inputStyle, convFromCtnr, tide } from "../GlobalVars.js"
@@ -14,10 +14,7 @@
 
     const setConvertFromSymbol = (e, symbol, ind, Q) => {
         let x = e.target.parentElement
-        console.log(ind, symbol, x, Q);
-
         mainObj.userSettings.convertFrom = symbol
-
         duplicateConvertFrom.value.innerHTML = `<div class="w-full h-14 px-2 flex justify-center items-center gap-x-3">${x.innerHTML}</div>`
         userInputConFrom.value = ""
         isListConFromDisplay.value = false
@@ -25,7 +22,6 @@
     watch (
         () => mainObj.userSettings.convertFrom,
         () => {
-            // console.log('updating dynList');
             mainObj.chartingData = undefined
             let symF = mainObj.userSettings.convertFrom
             let symT = mainObj.userSettings.convertTo
@@ -33,7 +29,6 @@
             let offset = 0
             mainObj.allSymbols.forEach((x, ind) => {
                 if(symF == x.symbol || symT == x.symbol) {
-                    // console.log('found', x.symbol, 'at ', ind);
                     list.splice(ind-offset, 1)
                     offset++
                     mainObj.dynList = list
@@ -41,7 +36,6 @@
                 if(symF == x.symbol) mainObj.userSettings.countryFrom = x.description
                 if(symT == x.symbol) mainObj.userSettings.countryTo = x.description
             })
-            // console.log(mainObj);
         }
     )
     watch (
@@ -100,8 +94,6 @@
                             "li",
                             {
                                 class: ulStyleIs.li,
-                                // key: list.symbol+ind,
-                                // onVnodeMounted: (e)=> console.log(e.el)
                             },
                             h(
                                 BtnComp,
@@ -110,27 +102,9 @@
                                     ariaLabel: list.symbol,
                                     key: list.symbol,
                                     ref: undefined,
-                                    // templateRef: (e)=> { return e.el} ,
-                                    // onVnodeMounted: (e)=> {console.log(this);},
-                                    // ref_key: ()=>list.symbol,
-                                    onVnodeMounted: (e)=> {
-                                        // console.log(e);
-                                        // console.log(BtnComp.props);
-                                        console.log(this);
-                                        // this.ref = e.el;
-                                        // console.log(ref);
-                                    },
                                     onmousedown: (e) => {
                                         setConvertFromSymbol(e, list.symbol, ind, this)
-                                        
-                                        // console.log(this);
-                                        // console.log(e);
-                                        // console.log(typeof this.$refs, this.$refs );
-                                        // console.log(typeof this.$refs, this.$refs.AUD) ;
-
                                     },
-                                    // onVnodeMounted: (e)=> console.log(e.el)
-
                                     // onVnodeMounted: () => console.log('onVnodeMounted :', this.$el) 
                                 },
                                 {

@@ -8,9 +8,7 @@
     import GoogleChart from './components/ChartingTTM.vue'
 
     onMounted(() => { 
-        // setTimeout(() => {
-            fetchAPI("constructMainObj", "https://api.exchangerate.host/symbols/") 
-        // }, 0)
+        fetchAPI("constructMainObj", "http://api.exchangerate.host/list?access_key=de421138240d84290a01b8eef88060c9") 
     })
 </script>
 
