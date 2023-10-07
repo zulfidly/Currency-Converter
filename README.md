@@ -6,6 +6,7 @@
  - coded in Vue 3 (Composition API)
  - an attempt on a [tutorial](https://github.com/joinsigma/frontend/tree/master/module_4/capstone) by [Sigma School](https://sigmaschool.co/)
  - styled with [TailwindCSS](https://tailwindcss.com/) framework
+ - initially built with `npm run build` 
  
  ### Gaining usage understanding of :
  - v-if, v-else, v-bind, v-show directives
