@@ -42,17 +42,17 @@
         let base = mainObj.userSettings.convertFrom
         let res = mainObj.userSettings.convertTo
         let amt = mainObj.userSettings.amount
-        let str = "http://api.exchangerate.host/convert?access_key=de421138240d84290a01b8eef88060c9" + `&from=${base}` + `&to=${res}` + `&amount=${amt}`
+        let str = `${mainObj.netlifyURL}/convert?access_key=de421138240d84290a01b8eef88060c9` + `&from=${base}` + `&to=${res}` + `&amount=${amt}`
         fetchAPI(`convertEndpoint`, str)
     }
-    // https://api.exchangerate.host/timeseries?base=USD&symbols=MYR&start_date=2023-03-01&end_date=2023-04-08
+
     const viewTTM = () => {
         let base = mainObj.userSettings.convertFrom
         let res = mainObj.userSettings.convertTo
         let amt = mainObj.userSettings.amount || "1"
         let x = getStartEndDates()
         // console.log(x);
-        let str = "http://api.exchangerate.host/timeframe?access_key=de421138240d84290a01b8eef88060c9" + `&base=${base}` + `&symbols=${res}` + `&amount=${amt}` + `&start_date=${x.startDate}` + `&end_date=${x.endDate}`
+        let str = `${mainObj.netlifyURL}/timeframe?access_key=de421138240d84290a01b8eef88060c9` + `&base=${base}` + `&symbols=${res}` + `&amount=${amt}` + `&start_date=${x.startDate}` + `&end_date=${x.endDate}`
         fetchAPI("getChartingData", str)
     }
 
@@ -70,7 +70,6 @@
             mainObj.userSettings.cFromFormattedForDisplay = "-invalid input-"
             mainObj.userSettings.amount = 0
         }
-        // console.log(mainObj.userSettings);
     }
 
 </script>

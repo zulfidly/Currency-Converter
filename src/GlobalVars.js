@@ -4,7 +4,7 @@
     export const mainObj = reactive({
         allSymbols: undefined,
         dynList: [],
-        netlifyURL: 'https://fidly-currex.netlify.app/api/',
+        netlifyURL: 'https://fidly-currex.netlify.app/api',
         userSettings: {
             convertFrom: "MYR",
             convertTo: undefined,

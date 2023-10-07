@@ -14,6 +14,9 @@
  - the @touchmove event listener
  - the slot tag
  
+### `/dist/_redirects`
+- content as `/api/* http://api.exchangerate.host/:splat 200!` (change after `npm run build`)
+
  ### Non/Reactive components/properties used :
  - ref() & reactive()
  - watch()

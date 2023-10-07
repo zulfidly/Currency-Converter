@@ -9,8 +9,7 @@
     import GoogleChart from './components/ChartingTTM.vue'
 
     onMounted(() => { 
-        fetchAPI("constructMainObj", `${mainObj.netlifyURL}list?access_key=de421138240d84290a01b8eef88060c9`) 
-        // fetchAPI("constructMainObj", "http://api.exchangerate.host/list?access_key=de421138240d84290a01b8eef88060c9") 
+        fetchAPI("constructMainObj", `${mainObj.netlifyURL}/list?access_key=de421138240d84290a01b8eef88060c9`) 
     })
 </script>
 
