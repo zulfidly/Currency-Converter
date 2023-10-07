@@ -15,7 +15,8 @@
  - the slot tag
  
 ### `/dist/_redirects`
-- content as `/api/* http://api.exchangerate.host/:splat 200!` (change after `npm run build`)
+- content as `/api/* http://api.exchangerate.host/:splat 200!` (change after `npm run build`).
+- See [here](https://abinjohn.in/mixed-content-netlify)
 
  ### Non/Reactive components/properties used :
  - ref() & reactive()
