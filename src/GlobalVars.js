@@ -55,7 +55,7 @@
             mainObj.dynList = array
         },
         convertEndpoint : function(x) {
-            mainObj.fetched.lastUpdated = "last updated " + dateFormatter(x.info.timestamp)
+            mainObj.fetched.lastUpdated = "requested " + dateFormatter(x.info.timestamp)
             mainObj.fetched.rate = rateStringFormatter(x.info.quote)
             mainObj.fetched.result = currencyFormatter(mainObj.userSettings.convertTo, x.result)
         },
@@ -180,8 +180,8 @@
         }
     }
     const dateFormatter = (d) => {
-        let formatter = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long'}) //long = DD MMM YYYY
-        return formatter.format(new Date(d))
+        let formatter = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', hour12: true, timeStyle: 'short' }) //long = DD MMM YYYY
+        return formatter.format(Date.now())
     }
     export const swapCurrencies = () => {
         mainObj.isSwapping = true
