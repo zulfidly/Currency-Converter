@@ -17,6 +17,7 @@ tailwind.config.js
 jsconfig.json
 vite.config.js
 main.js
+.env
 
 /public
 /node_modules
