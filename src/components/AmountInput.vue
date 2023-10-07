@@ -79,6 +79,7 @@
         <section class="flex">
             <p :class="[dashboardStyle.baseNameTag]"> {{ mainObj.userSettings.convertFrom  }}</p>
             <input            
+                name="userInputChecker"
                 @input="userInputChecker"
                 v-model.number="amtInput"
                 :class="[inputStyle.amtinput]"
