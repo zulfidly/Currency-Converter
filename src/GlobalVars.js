@@ -18,10 +18,10 @@
             rate: "",
             result: "",
         },
-        chartingData: undefined,
+        // chartingData: undefined,
+        // isChartDisplaying: false,
         isFetching: false,
         isSwapping: false,
-        isChartDisplaying: false,
         isFetchError: false,
     })
 
@@ -59,17 +59,18 @@
             mainObj.fetched.rate = rateStringFormatter(x.info.quote)
             mainObj.fetched.result = currencyFormatter(mainObj.userSettings.convertTo, x.result)
         },
-        getChartingData: function(x) {
-            let y = new Map(Object.entries(x.quotes))
-            structureChartData(y)
-        }
+        // getChartingData: function(x) {
+        //     let y = new Map(Object.entries(x.quotes))
+        //     console.log(y);
+        //     structureChartData(y)
+        // }
     }
 
 //////// re-init states (only when theres a fetch error)
     function reInitStates() {
         mainObj.isFetching = false
         mainObj.isSwapping = false
-        mainObj.isChartDisplaying = false
+        // mainObj.isChartDisplaying = false
     }
 ////////header stylings
     export const headerStyleIs = {
@@ -95,12 +96,12 @@
         }
 
 //////// z-indexes
-    export const viewTTMstyle = {
-        initPoly: ["transition-all ease-out duration-700 fill-[var(--color-background-mute)]"],
-        chartPoly: ["fill-[var(--viewTTM)]"],
-        initPath: ["transition-all ease-out duration-700 fill-[var(--color-background-mute)]"],
-        chartPath: ["fill-[var(--color-text)]"],
-    }
+    // export const viewTTMstyle = {
+    //     initPoly: ["transition-all ease-out duration-700 fill-[var(--color-background-mute)]"],
+    //     chartPoly: ["fill-[var(--viewTTM)]"],
+    //     initPath: ["transition-all ease-out duration-700 fill-[var(--color-background-mute)]"],
+    //     chartPath: ["fill-[var(--color-text)]"],
+    // }
 
 //////// z-indexes
     export const tide = {
@@ -168,7 +169,8 @@
     const rateStringFormatter = (r) => {
         let x = mainObj.userSettings.convertFrom
         let y = mainObj.userSettings.convertTo
-        return `${x} 1.00 = ${y} ${r}`
+        let z = new Intl.NumberFormat('en-GB', { maximumFractionDigits: 4 }).format(r)
+        return `${x} 1.00 = ${y} ${z}`
 
     }
     export const currencyFormatter = (symbol, amount) => {
@@ -236,17 +238,18 @@
         return { startDate: start_date, endDate: end_date }
     }
     
-    const structureChartData = (map) => {
-        mainObj.chartingData = [["Date", "Rates"]]
-        let temp = []
-        let regex = new RegExp("/", "g")
-        map.forEach((rate, date) => {
-            let d = new Intl.DateTimeFormat('en-GB', { dateStyle: 'short'}).format(new Date(date))
-            d = d.replace(regex, "-")
-            let r = Object.values(rate)
-            r = r[0].toFixed(4)
-            temp = [d, Number(r)]
-            mainObj.chartingData.push(temp)
-        })    
-        mainObj.isChartDisplaying =  true
-    }
+    // const structureChartData = (map) => {
+    //     mainObj.chartingData = [["Date", "Rates"]]
+    //     let temp = []
+    //     let regex = new RegExp("/", "g")
+    //     map.forEach((rate, date) => {
+    //         let d = new Intl.DateTimeFormat('en-GB', { dateStyle: 'short'}).format(new Date(date))
+    //         d = d.replace(regex, "-")
+    //         let r = Object.values(rate)
+    //         r = r[0].toFixed(4)
+    //         temp = [d, Number(r)]
+    //         mainObj.chartingData.push(temp)
+    //     })    
+    //     mainObj.isChartDisplaying =  true
+    //     console.log(mainObj.chartingData);
+    // }

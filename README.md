@@ -7,6 +7,7 @@
  - an attempt on a [tutorial](https://github.com/joinsigma/frontend/tree/master/module_4/capstone) by [Sigma School](https://sigmaschool.co/)
  - styled with [TailwindCSS](https://tailwindcss.com/) framework
  - initially built with `npm run build` 
+ - removed Google charting for TTM as it is now a paid feature
  
  ### Gaining usage understanding of :
  - v-if, v-else, v-bind, v-show directives

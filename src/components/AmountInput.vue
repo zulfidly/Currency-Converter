@@ -7,7 +7,7 @@
     import { buttonStyleIs, inputStyle, dashboardStyle, swapIconStyle } from '../GlobalVars.js';
     import ResultDashboard from './ResultDashboard.vue';
     import IconSwap from './icons/IconSwap.vue';
-    import IconViewTTM from "./icons/IconViewTTM.vue"
+    // import IconViewTTM from "./icons/IconViewTTM.vue"
 
     const amtInput = ref("")
 
@@ -95,9 +95,9 @@
                 <button :disabled="!isConvertible" @click="getConversion" :class="[buttonStyleIs.convertBtn, isConvertible?buttonStyleIs.convertBtnActive:buttonStyleIs.convertBtnNotActive]" aria-label="perform currency conversion">
                     Convert
                 </button>
-                <button :disabled="!isSwappable" @click="viewTTM" aria-label="view trailing twelve months chart" >
+                <!-- <button :disabled="!isSwappable" @click="viewTTM" aria-label="view trailing twelve months chart" >
                     <IconViewTTM />
-                </button>
+                </button> -->
             </template>
 
             <template #baseCurrency>{{ mainObj.userSettings.cFromFormattedForDisplay }} </template>
